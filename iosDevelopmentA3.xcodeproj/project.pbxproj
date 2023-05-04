@@ -56,15 +56,39 @@
 		7D0228672A00F0C0005B8672 /* iosDevelopmentA3 */ = {
 			isa = PBXGroup;
 			children = (
+				8CF982D92A033EE90073A7BF /* Model */,
+				8CF982D82A033EDE0073A7BF /* View */,
+				8CF982D72A033ED10073A7BF /* Controller */,
 				7D0228682A00F0C0005B8672 /* AppDelegate.swift */,
 				7D02286A2A00F0C0005B8672 /* SceneDelegate.swift */,
-				7D02286C2A00F0C0005B8672 /* ViewController.swift */,
-				7D02286E2A00F0C0005B8672 /* Main.storyboard */,
 				7D0228712A00F0C1005B8672 /* Assets.xcassets */,
 				7D0228732A00F0C1005B8672 /* LaunchScreen.storyboard */,
 				7D0228762A00F0C1005B8672 /* Info.plist */,
 			);
 			path = iosDevelopmentA3;
+			sourceTree = "<group>";
+		};
+		8CF982D72A033ED10073A7BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7D02286C2A00F0C0005B8672 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8CF982D82A033EDE0073A7BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7D02286E2A00F0C0005B8672 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8CF982D92A033EE90073A7BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
