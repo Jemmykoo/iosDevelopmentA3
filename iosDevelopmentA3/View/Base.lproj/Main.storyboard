@@ -58,6 +58,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="87G-ce-O7B"/>
+                    <connections>
+                        <outletCollection property="buttonsStyling" destination="M4B-uy-XA7" collectionClass="NSMutableArray" id="BSw-H2-0tK"/>
+                        <outletCollection property="buttonsStyling" destination="nuc-Ji-Hea" collectionClass="NSMutableArray" id="vos-eq-15F"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,9 +9,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    @IBOutlet var buttonsStyling: [UIButton]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        for item in buttonsStyling {
+            item.layer.cornerRadius = 10
+        }
     }
 
 
