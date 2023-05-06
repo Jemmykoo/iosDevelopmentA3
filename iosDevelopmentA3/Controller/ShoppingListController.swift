@@ -12,10 +12,25 @@ class ShoppingListController: UIViewController {
 
     
     @IBOutlet var buttonsStyling: [UIButton]!
+    @IBOutlet weak var shoppingListTableView: UITableView!
+    
+    var shoppingListItemsArray:[String] = []
+  
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //testing
+        shoppingListItemsArray.append("Bread")
+
+        
+        
+        //end test
+        
+        shoppingListTableView.delegate = self
+        shoppingListTableView.dataSource = self
         
         for item in buttonsStyling {
             item.layer.cornerRadius = 10
@@ -24,3 +39,24 @@ class ShoppingListController: UIViewController {
 
 
 }
+
+extension ShoppingListController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("")
+    }
+}
+
+extension ShoppingListController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return shoppingListItemsArray.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = shoppingListItemsArray[indexPath.row]
+
+        return cell
+    }
+}
+
