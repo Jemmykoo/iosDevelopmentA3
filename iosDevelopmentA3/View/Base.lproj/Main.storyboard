@@ -199,8 +199,11 @@
                                 <state key="normal" title="Add item">
                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="addItemsToShoppingList:" destination="uGg-vn-ZGa" eventType="touchUpInside" id="z2x-P1-k7E"/>
+                                </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="x2T-CR-I7A">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="x2T-CR-I7A">
                                 <rect key="frame" x="0.0" y="175" width="393" height="546"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -238,6 +241,7 @@
                     </view>
                     <navigationItem key="navigationItem" title=" Add Item" id="HXg-Nl-Bc1"/>
                     <connections>
+                        <outlet property="addItemButton" destination="yeF-aD-ecA" id="voI-dq-lR8"/>
                         <outlet property="ingredientListTableView" destination="x2T-CR-I7A" id="v1P-b9-s6z"/>
                         <outletCollection property="buttonsStyling" destination="yeF-aD-ecA" collectionClass="NSMutableArray" id="bro-7x-oCZ"/>
                     </connections>

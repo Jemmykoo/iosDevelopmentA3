@@ -24,8 +24,8 @@ class ShoppingListController: UIViewController {
         
         //testing
         //print("testhjbjbjb")
-        shoppingListItemsArray.append("Bread")
-        shoppingListItemsArray.append("Egg")
+       // shoppingListItemsArray.append("Bread")
+        //shoppingListItemsArray.append("Egg")
         
         
         //end test
