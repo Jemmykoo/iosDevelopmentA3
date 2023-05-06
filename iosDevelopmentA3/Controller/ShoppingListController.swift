@@ -1,13 +1,14 @@
 //
-//  ViewController.swift
+//  ShoppingListController.swift
 //  iosDevelopmentA3
 //
-//  Created by Jemima on 2/5/23.
+//  Created by N K shadi samour on 6/5/2023.
 //
+
 import Foundation
 import UIKit
 
-class ViewController: UIViewController {
+class ShoppingListController: UIViewController {
 
     
     @IBOutlet var buttonsStyling: [UIButton]!
@@ -23,4 +24,3 @@ class ViewController: UIViewController {
 
 
 }
-
