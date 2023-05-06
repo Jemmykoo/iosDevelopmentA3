@@ -56,7 +56,6 @@ extension IngredientListController: UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath)!
 
         selectedIngredientListArray.append((cell.textLabel?.text)!)
-//        print(cell.textLabel?.text as Any)
      
     }
     
@@ -74,7 +73,6 @@ extension IngredientListController: UITableViewDelegate {
 
             count += 1
         }
-        
     }
     
 }
