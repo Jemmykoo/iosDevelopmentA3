@@ -23,8 +23,9 @@ class ShoppingListController: UIViewController {
         // Do any additional setup after loading the view.
         
         //testing
+        //print("testhjbjbjb")
         shoppingListItemsArray.append("Bread")
-
+        shoppingListItemsArray.append("Egg")
         
         
         //end test
@@ -32,17 +33,27 @@ class ShoppingListController: UIViewController {
         shoppingListTableView.delegate = self
         shoppingListTableView.dataSource = self
         
+    
         for item in buttonsStyling {
             item.layer.cornerRadius = 10
         }
     }
 
-
 }
+
 
 extension ShoppingListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("")
+        
+        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+        
+     
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+        
     }
 }
 
