@@ -17,18 +17,24 @@ class ShoppingListController: UIViewController {
     var shoppingListItemsArray:[String] = []
   
     
-    
+//    override func viewWillAppear() {
+//        super.viewDidAppear(true)
+//        print("hi")
+//        
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //testing
-        //print("testhjbjbjb")
-       // shoppingListItemsArray.append("Bread")
-        //shoppingListItemsArray.append("Egg")
         
         
-        //end test
+        
+        var shoppingList = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
+
+        shoppingListItemsArray.append(contentsOf: shoppingList)
+        
+      
         
         shoppingListTableView.delegate = self
         shoppingListTableView.dataSource = self

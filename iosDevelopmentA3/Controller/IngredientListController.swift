@@ -41,6 +41,17 @@ class IngredientListController: UIViewController {
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
         
         print(selectedIngredientListArray)
+        var shoppingList = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
+        
+        if shoppingList.isEmpty {
+            UserDefaultManager.shared.defaults!.set(selectedIngredientListArray, forKey: "ShoppingList")
+        
+        } else
+        {
+            shoppingList.append(contentsOf: selectedIngredientListArray)
+            UserDefaultManager.shared.defaults!.set(shoppingList, forKey: "ShoppingList")
+        }
+       
     }
     
     
