@@ -14,27 +14,29 @@ class ShoppingListController: UIViewController {
     @IBOutlet var buttonsStyling: [UIButton]!
     @IBOutlet weak var shoppingListTableView: UITableView!
     
-    var shoppingListItemsArray:[String] = []
-  
+    var shoppingListItemsArray:[String] = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
     
-//    override func viewWillAppear() {
-//        super.viewDidAppear(true)
-//        print("hi")
-//        
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+            
+      
+        super.viewWillAppear(animated)
+    shoppingListItemsArray = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
+        
+        shoppingListTableView.reloadData()
+      
+        
+        
+        }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        //shoppingListItemsArray.append(contentsOf: shoppingList)
         
         
+       
         
-        
-        var shoppingList = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
-
-        shoppingListItemsArray.append(contentsOf: shoppingList)
-        
-      
         
         shoppingListTableView.delegate = self
         shoppingListTableView.dataSource = self
@@ -45,6 +47,16 @@ class ShoppingListController: UIViewController {
         }
     }
 
+    
+    
+    @IBAction func clearShoppingList(_ sender: UIButton) {
+        UserDefaultManager.shared.removeAllData()
+        shoppingListItemsArray.removeAll()
+        shoppingListTableView.reloadData()
+    }
+    
+    
+    
 }
 
 

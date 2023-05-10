@@ -166,6 +166,9 @@
                                 <state key="normal" title="Clear list">
                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="clearShoppingList:" destination="u8G-Jj-sov" eventType="touchUpInside" id="JMY-zP-LsQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Yiq-Cu-hLA"/>
