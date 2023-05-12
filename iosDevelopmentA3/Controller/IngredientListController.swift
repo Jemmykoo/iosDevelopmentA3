@@ -15,11 +15,12 @@ class IngredientListController: UIViewController {
     @IBOutlet var buttonsStyling: [UIButton]!
     @IBOutlet weak var ingredientListTableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var ingredientListArray:[String] = ["Bread", "Egg", "Milk", "Apple", "Avacado", "Almond", "Apple juice", "Bannana", "Bacon", "Babaganoosh"]
-    
+    var ingredientListArraySearch:[String] = []
     var selectedIngredientListArray:[String] = []
-    
+    var hasSearched = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class IngredientListController: UIViewController {
         
         ingredientListTableView.delegate = self
         ingredientListTableView.dataSource = self
-        
+        searchBar.delegate = self
     
         for item in buttonsStyling {
             item.layer.cornerRadius = 10
@@ -40,7 +41,7 @@ class IngredientListController: UIViewController {
     
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
         
-        print(selectedIngredientListArray)
+    
         var shoppingList = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
         
         if shoppingList.isEmpty {
@@ -54,11 +55,23 @@ class IngredientListController: UIViewController {
        
     }
     
-    
-    
 }
 
-
+extension IngredientListController : UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        hasSearched = true
+        
+        if(searchText.isEmpty){
+            ingredientListArraySearch = ingredientListArray
+        }else{
+            ingredientListArraySearch = ingredientListArray.filter{$0.lowercased().contains(searchText.lowercased())}
+        }
+        
+        
+        ingredientListTableView.reloadData()
+    }
+}
+    
 extension IngredientListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -90,13 +103,27 @@ extension IngredientListController: UITableViewDelegate {
 
 extension IngredientListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        if(hasSearched) {
+          return ingredientListArraySearch.count
+        }
+        
         return ingredientListArray.count
+
+        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+       
         cell.textLabel?.text = ingredientListArray[indexPath.row]
+        
+        if(hasSearched) {
+            cell.textLabel?.text = ingredientListArraySearch[indexPath.row]
+        }
+        
+        
 
         return cell
     }

@@ -18,24 +18,17 @@ class ShoppingListController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
             
-      
         super.viewWillAppear(animated)
-    shoppingListItemsArray = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
+        shoppingListItemsArray = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
         
         shoppingListTableView.reloadData()
       
-        
         
         }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        //shoppingListItemsArray.append(contentsOf: shoppingList)
-        
-        
-       
         
         
         shoppingListTableView.delegate = self

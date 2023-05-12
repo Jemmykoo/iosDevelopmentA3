@@ -194,12 +194,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeF-aD-ecA">
-                                <rect key="frame" x="115" y="761" width="163" height="32"/>
+                                <rect key="frame" x="115" y="778" width="163" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="tintColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Add item">
+                                <state key="normal" title="Add to Shopping List">
                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                 </state>
                                 <connections>
@@ -238,6 +238,19 @@
                                     <outlet property="delegate" destination="uGg-vn-ZGa" id="PZ6-B8-29W"/>
                                 </connections>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BY6-PY-tca">
+                                <rect key="frame" x="115" y="738" width="163" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="tintColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Add Missing Ingredient">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="addItemsToShoppingList:" destination="uGg-vn-ZGa" eventType="touchUpInside" id="qyV-Vd-nnH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="n2X-bt-DfW"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
@@ -246,6 +259,7 @@
                     <connections>
                         <outlet property="addItemButton" destination="yeF-aD-ecA" id="voI-dq-lR8"/>
                         <outlet property="ingredientListTableView" destination="x2T-CR-I7A" id="v1P-b9-s6z"/>
+                        <outlet property="searchBar" destination="e3K-ia-U4c" id="j56-P6-RKs"/>
                         <outletCollection property="buttonsStyling" destination="yeF-aD-ecA" collectionClass="NSMutableArray" id="bro-7x-oCZ"/>
                     </connections>
                 </viewController>
