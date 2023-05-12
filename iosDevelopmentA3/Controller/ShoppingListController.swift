@@ -23,14 +23,11 @@ class ShoppingListController: UIViewController {
         
         shoppingListTableView.reloadData()
       
-        
         }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         shoppingListTableView.delegate = self
         shoppingListTableView.dataSource = self
         
