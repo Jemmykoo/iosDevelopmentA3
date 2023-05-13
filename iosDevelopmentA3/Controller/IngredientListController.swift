@@ -15,9 +15,14 @@ class IngredientListController: UIViewController {
     @IBOutlet var buttonsStyling: [UIButton]!
     @IBOutlet weak var ingredientListTableView: UITableView!
     
+    @IBOutlet weak var feedbackLabel: UILabel!
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var ingredientListArray:[String] = ["Bread", "Egg", "Milk", "Apple", "Avacado", "Almond", "Apple juice", "Bannana", "Bacon", "Babaganoosh"]
+    var ingredientListArray:[String] = UserDefaultManager.shared.defaults!.array(forKey: "IngredientList") as? [String] ?? []
+    
+    var ingredientListArrayDefault = ["Bread", "Egg", "Milk", "Apple", "Avacado", "Almond", "Apple juice", "Bannana", "Bacon", "Babaganoosh","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+    
     var ingredientListArraySearch:[String] = []
     var selectedIngredientListArray:[String] = []
     var hasSearched = false
@@ -27,6 +32,13 @@ class IngredientListController: UIViewController {
         // Do any additional setup after loading the view.
         
         ingredientListArray.sort()
+        ingredientListArrayDefault.sort()
+        
+        if(ingredientListArray.isEmpty)
+        {
+            ingredientListArray.append(contentsOf: ingredientListArrayDefault)
+            UserDefaultManager.shared.defaults!.set(ingredientListArrayDefault, forKey: "IngredientList")
+        }
         
         ingredientListTableView.delegate = self
         ingredientListTableView.dataSource = self
@@ -53,6 +65,9 @@ class IngredientListController: UIViewController {
             UserDefaultManager.shared.defaults!.set(shoppingList, forKey: "ShoppingList")
         }
        
+        feedbackLabel.text = "Items Added"
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { self.feedbackLabel.text = ""}
     }
     
 }

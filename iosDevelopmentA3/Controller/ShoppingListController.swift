@@ -16,6 +16,7 @@ class ShoppingListController: UIViewController {
     
     var shoppingListItemsArray:[String] = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
     
+    
     override func viewWillAppear(_ animated: Bool) {
             
         super.viewWillAppear(animated)
@@ -52,8 +53,9 @@ class ShoppingListController: UIViewController {
 
 extension ShoppingListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)!
         
-        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+        cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         
      
     }
