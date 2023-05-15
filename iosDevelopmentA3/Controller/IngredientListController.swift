@@ -21,7 +21,7 @@ class IngredientListController: UIViewController {
     
     var ingredientListArray:[String] = UserDefaultManager.shared.defaults!.array(forKey: "IngredientList") as? [String] ?? []
     
-    var ingredientListArrayDefault = ["Bread", "Egg", "Milk", "Apple", "Avacado", "Almond", "Apple juice", "Bannana", "Bacon", "Babaganoosh","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+    var ingredientListArrayDefault: [String] = ["Bread", "Egg", "Milk", "Apple", "Avacado", "Almond", "Apple juice", "Bannana", "Bacon", "Babaganoosh","Arugala","Artichoke","Bruscetta","Bagel","Baked beans","Black beans","Corn","Melon","Mango","Cherries","Broccoli","Cabbage","Greek Yogurt","Yogurt","Creame cheese","Pineapple","Plums","Black Olives","Green Olives","Tuna","Smoked Salmon","Salmon","Pasta","Spagetti","Red Onion","Onion","Soy sauce","Parmesan cheese","Oregano","Olive oil","Vegetable oil","Sessame oil","White rice","Brown rice","Potato","Peas","Zucchini","Zaartar","Labneh","Hummus","Feta","Sausages","Lettuce","Tomatos","Cucumber"]
     
     var ingredientListArraySearch:[String] = []
     var selectedIngredientListArray:[String] = []
@@ -30,6 +30,7 @@ class IngredientListController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         
         ingredientListArray.sort()
         ingredientListArrayDefault.sort()
