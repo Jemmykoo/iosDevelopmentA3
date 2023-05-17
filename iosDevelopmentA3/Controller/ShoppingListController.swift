@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class ShoppingListController: UIViewController {
 
@@ -14,16 +15,16 @@ class ShoppingListController: UIViewController {
     @IBOutlet var buttonsStyling: [UIButton]!
     @IBOutlet weak var shoppingListTableView: UITableView!
     
-    var shoppingListItemsArray:[String] = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
+    let realm = try! Realm()
+    
+    var shoppingListItemsArray:[Ingredient] = []
     
     
     override func viewWillAppear(_ animated: Bool) {
-            
         super.viewWillAppear(animated)
-        shoppingListItemsArray = UserDefaultManager.shared.defaults!.array(forKey: "ShoppingList") as? [String] ?? []
         
-        shoppingListTableView.reloadData()
-      
+        loadSelectedIngredients()
+        
         }
 
 
@@ -31,6 +32,8 @@ class ShoppingListController: UIViewController {
         super.viewDidLoad()
         shoppingListTableView.delegate = self
         shoppingListTableView.dataSource = self
+        
+        
         
     
         for item in buttonsStyling {
@@ -41,11 +44,37 @@ class ShoppingListController: UIViewController {
     
     
     @IBAction func clearShoppingList(_ sender: UIButton) {
-        UserDefaultManager.shared.removeAllData()
-        shoppingListItemsArray.removeAll()
+        
+        for item in shoppingListItemsArray
+        {
+            realm.beginWrite()
+            item.selected = false
+            try! realm.commitWrite()
+        }
+        
+        loadSelectedIngredients()
         shoppingListTableView.reloadData()
     }
     
+    func loadSelectedIngredients()
+    {
+        
+            shoppingListItemsArray.removeAll()
+            
+            let data = realm.objects(Ingredient.self)
+            
+            for item in data {
+                
+                if(item.selected)
+                {
+                    shoppingListItemsArray.append(item)
+                }
+             
+            }
+            
+            //ingredientListArray.sort()
+            shoppingListTableView.reloadData()
+        }
     
     
 }
@@ -53,9 +82,8 @@ class ShoppingListController: UIViewController {
 
 extension ShoppingListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)!
         
-        cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
         
      
     }
@@ -75,9 +103,8 @@ extension ShoppingListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = shoppingListItemsArray[indexPath.row]
+        cell.textLabel?.text = shoppingListItemsArray[indexPath.row].name
 
         return cell
     }
 }
-

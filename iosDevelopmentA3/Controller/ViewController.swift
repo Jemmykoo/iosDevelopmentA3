@@ -6,21 +6,31 @@
 //
 import Foundation
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController {
 
     
     @IBOutlet var buttonsStyling: [UIButton]!
     
+    let realm = try! Realm()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //deleteRealmDataTestingFunctionality()
         
         for item in buttonsStyling {
             item.layer.cornerRadius = 10
         }
     }
 
-
+    func deleteRealmDataTestingFunctionality()
+    {
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
 }
 

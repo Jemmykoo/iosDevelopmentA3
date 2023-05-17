@@ -6,14 +6,16 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Ingredient {
+class Ingredient: Object {
     
-    var name: String
-    var quantity: Int
-    var selected: Bool
+    @objc dynamic var name: String = ""
+    @objc dynamic var quantity: Int = 1
+    @objc dynamic var selected: Bool = false
     
-    init(_ name: String,_ quantity: Int,_ selected: Bool) {
+    convenience init(_ name: String,_ quantity: Int,_ selected: Bool) {
+        self.init()
         self.name = name
         self.quantity = quantity
         self.selected = selected
