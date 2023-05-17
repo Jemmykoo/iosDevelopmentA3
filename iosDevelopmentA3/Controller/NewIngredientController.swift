@@ -68,6 +68,8 @@ class NewIngredientController: UIViewController {
         else {
             feedbackLabel.text = "Ingredient Exists"
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { self.feedbackLabel.text = ""}
     }
     
     func loadIngredients()
