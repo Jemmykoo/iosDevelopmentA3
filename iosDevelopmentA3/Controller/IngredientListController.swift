@@ -187,5 +187,46 @@ extension IngredientListController: UITableViewDataSource {
 
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        return .delete
+//    }
+//    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        
+//        if editingStyle == .delete
+//        {
+//            ingredientListTableView.beginUpdates()
+//            if(hasSearched) {
+//                ingredientListArraySearch.remove(at: indexPath.row)
+//            }
+//            else {
+//                ingredientListArray.remove(at: indexPath.row)
+//            }
+//            
+//            print(ingredientListArray)
+//            
+//            ingredientListTableView.deleteRows(at: [indexPath], with: .fade)
+//            
+//            ingredientListTableView.endUpdates()
+//            
+//            //ingredientListTableView.reloadData()
+//            
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//           
+//            let data = realm.objects(Ingredient.self)
+//            
+//            for item in data {
+//                
+//                if item.name == cell.textLabel?.text
+//                {
+//                    try! realm.write {
+//                        realm.delete(item)
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
 }
 
