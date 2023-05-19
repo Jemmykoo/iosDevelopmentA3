@@ -14,6 +14,7 @@ class ShoppingListController: UIViewController {
     
     @IBOutlet var buttonsStyling: [UIButton]!
     @IBOutlet weak var shoppingListTableView: UITableView!
+    //var checkedItems:[String] = ["Hummus","Apple"]
     
     let realm = try! Realm()
     
@@ -23,18 +24,22 @@ class ShoppingListController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadSelectedIngredients()
+        loadShoppingList()
+        
+        }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+      
         
         }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         shoppingListTableView.delegate = self
         shoppingListTableView.dataSource = self
-        
-        
-        
     
         for item in buttonsStyling {
             item.layer.cornerRadius = 10
@@ -48,31 +53,35 @@ class ShoppingListController: UIViewController {
         for item in shoppingListItemsArray
         {
             realm.beginWrite()
-            item.selected = false
+            item.isInShoppingList = false
             try! realm.commitWrite()
         }
         
-        loadSelectedIngredients()
+        loadShoppingList()
         shoppingListTableView.reloadData()
     }
     
-    func loadSelectedIngredients()
+    func loadShoppingList()
     {
         
             shoppingListItemsArray.removeAll()
             
-            let data = realm.objects(Ingredient.self)
+            let ingredients = realm.objects(Ingredient.self)
             
-            for item in data {
+           
+       
+            for item in ingredients {
                 
-                if(item.selected)
+                if(item.isInShoppingList)
                 {
                     shoppingListItemsArray.append(item)
                 }
              
             }
             
-            //ingredientListArray.sort()
+            shoppingListItemsArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
+      
+        
             shoppingListTableView.reloadData()
         }
     
@@ -83,16 +92,23 @@ class ShoppingListController: UIViewController {
 extension ShoppingListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+        let ing = shoppingListItemsArray[indexPath.row]
+      
+        if ing.isCheckedOff == false {
+            try! realm.write {
+                ing.isCheckedOff = true
+            }
+        } else {
+            try! realm.write {
+                ing.isCheckedOff = false
+            }
+        }
         
-     
+        tableView.reloadData()
+        
+        
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-        tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
-        
-    }
 }
 
 extension ShoppingListController: UITableViewDataSource {
@@ -102,9 +118,20 @@ extension ShoppingListController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+      
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = shoppingListItemsArray[indexPath.row].name
-
+        
+        if shoppingListItemsArray[indexPath.row].isCheckedOff
+        {
+            cell.accessoryType = .checkmark
+        }
+        else
+        {
+            cell.accessoryType = .none
+        }
+        
         return cell
     }
 }

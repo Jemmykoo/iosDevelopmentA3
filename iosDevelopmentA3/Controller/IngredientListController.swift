@@ -71,7 +71,7 @@ class IngredientListController: UIViewController {
                 if(item.name == ingredientName)
                 {
                     realm.beginWrite()
-                    item.selected = true
+                    item.isInShoppingList = true
                     try! realm.commitWrite()
                     
                 }
