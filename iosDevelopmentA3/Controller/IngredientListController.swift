@@ -37,9 +37,7 @@ class IngredientListController: UIViewController {
         
         writeDefaultIngredients()
         loadIngredients()
-        //sort
-        ingredientListArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
-      
+        
         
         
     }
@@ -93,7 +91,9 @@ class IngredientListController: UIViewController {
             ingredientListArray.append(item)
         }
         
-        //ingredientListArray.sort()
+        //sort
+        ingredientListArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
+      
         ingredientListTableView.reloadData()
     }
     
@@ -184,49 +184,55 @@ extension IngredientListController: UITableViewDataSource {
         }
         
         
-
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        return .delete
-//    }
-//    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        
-//        if editingStyle == .delete
-//        {
-//            ingredientListTableView.beginUpdates()
-//            if(hasSearched) {
-//                ingredientListArraySearch.remove(at: indexPath.row)
-//            }
-//            else {
-//                ingredientListArray.remove(at: indexPath.row)
-//            }
-//            
-//            print(ingredientListArray)
-//            
-//            ingredientListTableView.deleteRows(at: [indexPath], with: .fade)
-//            
-//            ingredientListTableView.endUpdates()
-//            
-//            //ingredientListTableView.reloadData()
-//            
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//           
-//            let data = realm.objects(Ingredient.self)
-//            
-//            for item in data {
-//                
-//                if item.name == cell.textLabel?.text
-//                {
-//                    try! realm.write {
-//                        realm.delete(item)
-//                    }
-//                }
-//            }
-//        }
-//    }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+       
+        if(.delete == editingStyle)
+        {
+            
+            let cell = tableView.cellForRow(at: indexPath)!
+            let data = realm.objects(Ingredient.self)
+            
+            for item in data {
+                
+                if item.name == cell.textLabel?.text
+                {
+                    try! realm.write {
+                        realm.delete(item)
+                    }
+                    break
+                }
+            }
+            
+            ingredientListTableView.beginUpdates()
+           
+            if(hasSearched) {
+                let itemToRemove = ingredientListArraySearch[indexPath.row]
+                
+                let itemToRemoveIndex = ingredientListArray.firstIndex(of: itemToRemove)!
+                
+                ingredientListArray.remove(at: itemToRemoveIndex)
+                
+                ingredientListArraySearch.remove(at: indexPath.row)
+                
+            }
+            else {
+                ingredientListArray.remove(at: indexPath.row)
+            }
+            
+            ingredientListTableView.deleteRows(at: [indexPath], with: .fade)
+            
+            ingredientListTableView.endUpdates()
+        }
+    }
     
 }
 

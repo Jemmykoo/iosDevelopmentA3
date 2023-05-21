@@ -54,6 +54,7 @@ class ShoppingListController: UIViewController {
         {
             realm.beginWrite()
             item.isInShoppingList = false
+            item.isCheckedOff = false
             try! realm.commitWrite()
         }
         

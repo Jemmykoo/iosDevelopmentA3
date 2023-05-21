@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        //print(Realm.Configuration.defaultConfiguration.fileURL)
         //deleteRealmDataTestingFunctionality()
         
         for item in buttonsStyling {

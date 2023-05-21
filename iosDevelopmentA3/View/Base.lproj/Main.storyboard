@@ -257,6 +257,7 @@
                         <outlet property="ingredientListTableView" destination="x2T-CR-I7A" id="v1P-b9-s6z"/>
                         <outlet property="searchBar" destination="e3K-ia-U4c" id="j56-P6-RKs"/>
                         <outletCollection property="buttonsStyling" destination="yeF-aD-ecA" collectionClass="NSMutableArray" id="bro-7x-oCZ"/>
+                        <outletCollection property="buttonsStyling" destination="BY6-PY-tca" collectionClass="NSMutableArray" id="gnP-JB-329"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1O-a4-VDj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
