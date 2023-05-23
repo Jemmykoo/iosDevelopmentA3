@@ -19,7 +19,7 @@ class IngredientListController: UIViewController {
     
     let realm = try! Realm()
     
-    var ingredientNameArray: [String] = ["Bread", "Egg", "Milk", "Apple", "Avacado", "Almond", "Apple juice", "Bannana", "Bacon", "Babaganoosh","Arugala","Artichoke","Bruscetta","Bagel","Baked beans","Black beans","Corn","Melon","Mango","Cherries","Broccoli","Cabbage","Greek Yogurt","Yogurt","Creame cheese","Pineapple","Plums","Black Olives","Green Olives","Tuna","Smoked Salmon","Salmon","Pasta","Spagetti","Red Onion","Onion","Soy sauce","Parmesan cheese","Oregano","Olive oil","Vegetable oil","Sessame oil","White rice","Brown rice","Potato","Peas","Zucchini","Zaartar","Labneh","Hummus","Feta","Sausages","Lettuce","Tomatos","Cucumber"]
+    var ingredientNameArray: [String] = ["Bread", "Egg", "Milk", "Apple", "Avacado", "Almond", "Apple juice", "Bannana", "Bacon", "Babaganoosh","Arugala","Artichoke","Bruscetta","Bagel","Baked beans","Black beans","Corn","Melon","Mango","Cherries","Broccoli","Cabbage","Greek Yogurt","Yogurt","Blue Cheese","Pineapple","Plums","Black Olives","Green Olives","Tuna","Smoked Salmon","Salmon","Pasta","Spagetti","Red Onion","Onion","Soy sauce","Parmesan Cheese","Oregano","Olive oil","Vegetable oil","Sessame oil","White rice","Brown rice","Potato","Peas","Zucchini","Zaartar","Labneh","Hummus","Feta","Sausages","Lettuce","Tomatos","Cucumber"]
     
    
     
@@ -33,12 +33,8 @@ class IngredientListController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       
-        
         writeDefaultIngredients()
         loadIngredients()
-        
-        
         
     }
     
@@ -68,10 +64,15 @@ class IngredientListController: UIViewController {
             {
                 if(item.name == ingredientName)
                 {
+                   
                     realm.beginWrite()
-                    item.isInShoppingList = true
-                    try! realm.commitWrite()
+                    if(item.isInShoppingList) {
+                        item.quantity += 1
+                    } else {
+                        item.isInShoppingList = true
+                    }
                     
+                    try! realm.commitWrite()
                 }
             }
         }

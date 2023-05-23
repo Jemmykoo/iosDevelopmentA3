@@ -14,7 +14,6 @@ class ShoppingListController: UIViewController {
     
     @IBOutlet var buttonsStyling: [UIButton]!
     @IBOutlet weak var shoppingListTableView: UITableView!
-    //var checkedItems:[String] = ["Hummus","Apple"]
     
     let realm = try! Realm()
     
@@ -55,6 +54,7 @@ class ShoppingListController: UIViewController {
             realm.beginWrite()
             item.isInShoppingList = false
             item.isCheckedOff = false
+            item.quantity = 1
             try! realm.commitWrite()
         }
         
@@ -69,8 +69,6 @@ class ShoppingListController: UIViewController {
             
             let ingredients = realm.objects(Ingredient.self)
             
-           
-       
             for item in ingredients {
                 
                 if(item.isInShoppingList)
@@ -122,7 +120,12 @@ extension ShoppingListController: UITableViewDataSource {
       
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = shoppingListItemsArray[indexPath.row].name
+        
+        if shoppingListItemsArray[indexPath.row].quantity > 1 {
+            cell.textLabel?.text = "\(shoppingListItemsArray[indexPath.row].name) (\(shoppingListItemsArray[indexPath.row].quantity))"
+        } else {
+            cell.textLabel?.text = "\(shoppingListItemsArray[indexPath.row].name)"
+        }
         
         if shoppingListItemsArray[indexPath.row].isCheckedOff
         {
