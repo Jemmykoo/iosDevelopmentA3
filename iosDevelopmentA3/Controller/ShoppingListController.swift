@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class ShoppingListController: UIViewController {
-
+class ShoppingListController: UIViewController
+{
     
     @IBOutlet var buttonsStyling: [UIButton]!
     @IBOutlet weak var shoppingListTableView: UITableView!
@@ -20,20 +20,23 @@ class ShoppingListController: UIViewController {
     var shoppingListItemsArray:[Ingredient] = []
     
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(animated)
         
         loadShoppingList()
         
-        }
+    }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool)
+    {
         super.viewDidAppear(animated)
       
         
-        }
+    }
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         
@@ -47,7 +50,8 @@ class ShoppingListController: UIViewController {
 
     
     
-    @IBAction func clearShoppingList(_ sender: UIButton) {
+    @IBAction func clearShoppingList(_ sender: UIButton)
+    {
         
         for item in shoppingListItemsArray
         {
@@ -64,23 +68,18 @@ class ShoppingListController: UIViewController {
     
     func loadShoppingList()
     {
-        
             shoppingListItemsArray.removeAll()
-            
             let ingredients = realm.objects(Ingredient.self)
             
-            for item in ingredients {
-                
+            for item in ingredients
+            {
                 if(item.isInShoppingList)
                 {
                     shoppingListItemsArray.append(item)
                 }
-             
             }
             
             shoppingListItemsArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
-      
-        
             shoppingListTableView.reloadData()
         }
     
@@ -88,42 +87,52 @@ class ShoppingListController: UIViewController {
 }
 
 
-extension ShoppingListController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension ShoppingListController: UITableViewDelegate
+{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         
-        let ing = shoppingListItemsArray[indexPath.row]
+        let ingredient = shoppingListItemsArray[indexPath.row]
       
-        if ing.isCheckedOff == false {
-            try! realm.write {
-                ing.isCheckedOff = true
+        if ingredient.isCheckedOff == false
+        {
+            try! realm.write
+            {
+                ingredient.isCheckedOff = true
             }
-        } else {
-            try! realm.write {
-                ing.isCheckedOff = false
+        }
+        else
+        {
+            try! realm.write
+            {
+                ingredient.isCheckedOff = false
             }
         }
         
         tableView.reloadData()
         
-        
     }
     
 }
 
-extension ShoppingListController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ShoppingListController: UITableViewDataSource
+{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return shoppingListItemsArray.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-      
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        if shoppingListItemsArray[indexPath.row].quantity > 1 {
+        if shoppingListItemsArray[indexPath.row].quantity > 1
+        {
             cell.textLabel?.text = "\(shoppingListItemsArray[indexPath.row].name) (\(shoppingListItemsArray[indexPath.row].quantity))"
-        } else {
+        }
+        else
+        {
             cell.textLabel?.text = "\(shoppingListItemsArray[indexPath.row].name)"
         }
         

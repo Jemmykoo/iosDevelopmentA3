@@ -23,7 +23,6 @@ class NewIngredientController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-       
     }
 
     
@@ -51,7 +50,7 @@ class NewIngredientController: UIViewController {
         {
             if newIngredient.name == ""
             {
-                feedbackLabel.text = "Please enter valid name"
+                feedbackLabel.text = "Please enter name"
             }
             else
             {

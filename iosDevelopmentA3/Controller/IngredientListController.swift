@@ -71,7 +71,6 @@ class IngredientListController: UIViewController {
                     } else {
                         item.isInShoppingList = true
                     }
-                    
                     try! realm.commitWrite()
                 }
             }
