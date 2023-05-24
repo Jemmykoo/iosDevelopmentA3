@@ -16,30 +16,22 @@ class ShoppingListController: UIViewController
     @IBOutlet weak var shoppingListTableView: UITableView!
     
     let realm = try! Realm()
-    
     var shoppingListItemsArray:[Ingredient] = []
-    
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        
         loadShoppingList()
-        
     }
     
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
-      
-        
     }
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        
         shoppingListTableView.delegate = self
         shoppingListTableView.dataSource = self
     
@@ -48,8 +40,6 @@ class ShoppingListController: UIViewController
         }
     }
 
-    
-    
     @IBAction func clearShoppingList(_ sender: UIButton)
     {
         
@@ -110,7 +100,6 @@ extension ShoppingListController: UITableViewDelegate
         }
         
         tableView.reloadData()
-        
     }
     
 }

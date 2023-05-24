@@ -15,7 +15,6 @@ class Ingredient: Object {
     @objc dynamic var isInShoppingList: Bool = false
     @objc dynamic var isCheckedOff: Bool = false
     
-    
     convenience init(_ name: String,_ quantity: Int,_ selected: Bool) {
         self.init()
         self.name = name
@@ -23,6 +22,4 @@ class Ingredient: Object {
         self.isInShoppingList = selected
         
     }
-    
-    
 }

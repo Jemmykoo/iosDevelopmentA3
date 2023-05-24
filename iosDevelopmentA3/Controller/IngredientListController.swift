@@ -41,7 +41,6 @@ class IngredientListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         ingredientListTableView.delegate = self
         ingredientListTableView.dataSource = self
@@ -135,10 +134,7 @@ extension IngredientListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-
         let cell = tableView.cellForRow(at: indexPath)!
-
-        
         selectedIngredientListArray.append((cell.textLabel?.text)!)
      
     }
@@ -194,7 +190,6 @@ extension IngredientListController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-       
         if(.delete == editingStyle)
         {
             
