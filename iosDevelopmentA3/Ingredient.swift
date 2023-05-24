@@ -9,17 +9,17 @@ import Foundation
 import RealmSwift
 
 class Ingredient: Object {
-    
+
     @objc dynamic var name: String = ""
     @objc dynamic var quantity: Int = 1
     @objc dynamic var isInShoppingList: Bool = false
     @objc dynamic var isCheckedOff: Bool = false
-    
-    convenience init(_ name: String,_ quantity: Int,_ selected: Bool) {
+
+    convenience init(_ name: String, _ quantity: Int, _ selected: Bool) {
         self.init()
         self.name = name
         self.quantity = quantity
         self.isInShoppingList = selected
-        
+
     }
 }

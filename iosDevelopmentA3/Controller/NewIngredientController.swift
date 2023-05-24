@@ -10,68 +10,54 @@ import UIKit
 import RealmSwift
 
 class NewIngredientController: UIViewController {
-    
-   
+
     @IBOutlet weak var ingredientNameTextField: UITextField!
     @IBOutlet weak var addNewItemButton: UIButton!
     @IBOutlet weak var feedbackLabel: UILabel!
-   
+
     let realm = try! Realm()
-    var ingredientListArray:[Ingredient] = []
-    
+    var ingredientListArray: [Ingredient] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
     }
 
-    
     @IBAction func addNewItem(_ sender: UIButton) {
-        
+
         loadIngredients()
         let ingredientName = ingredientNameTextField.text!
-        let newIngredient = Ingredient(ingredientName,1,false)
+        let newIngredient = Ingredient(ingredientName, 1, false)
         var hasIngredient = false
-        
-        for item in ingredientListArray
-        {
-            if(item.name.lowercased() == newIngredient.name.lowercased())
-            {
+
+        for item in ingredientListArray {
+            if(item.name.lowercased() == newIngredient.name.lowercased()) {
                 hasIngredient = true
             }
         }
-    
-        if (hasIngredient == false)
-        {
-            if newIngredient.name == ""
-            {
+
+        if (hasIngredient == false) {
+            if newIngredient.name == "" {
                 feedbackLabel.text = "Please enter name"
-            }
-            else
-            {
-                try! realm.write{
+            } else {
+                try! realm.write {
                     realm.add(newIngredient)
                 }
-                
+
                 feedbackLabel.text = "Ingredient Added"
             }
-            
-   
-        }
-        else {
+        } else {
             feedbackLabel.text = "Ingredient Exists"
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { self.feedbackLabel.text = ""}
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { self.feedbackLabel.text = "" }
     }
-    
-    func loadIngredients()
-    {
+
+    func loadIngredients() {
         ingredientListArray.removeAll()
         let data = realm.objects(Ingredient.self)
-        
+
         for item in data {
-            
             ingredientListArray.append(item)
         }
     }

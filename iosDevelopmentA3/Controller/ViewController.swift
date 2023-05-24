@@ -10,24 +10,22 @@ import RealmSwift
 
 class ViewController: UIViewController {
 
-    
     @IBOutlet var buttonsStyling: [UIButton]!
-    
+
     let realm = try! Realm()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //print(Realm.Configuration.defaultConfiguration.fileURL)
         //deleteRealmDataTestingFunctionality()
-        
+
         for item in buttonsStyling {
             item.layer.cornerRadius = 10
         }
     }
 
-    func deleteRealmDataTestingFunctionality()
-    {
+    func deleteRealmDataTestingFunctionality() {
         try! realm.write {
             realm.deleteAll()
         }
