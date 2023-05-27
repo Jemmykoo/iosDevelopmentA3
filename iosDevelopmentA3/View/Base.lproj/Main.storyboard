@@ -82,7 +82,7 @@
         <!--Recipes-->
         <scene sceneID="JR6-Mx-ICg">
             <objects>
-                <viewController id="Jyc-8o-bAh" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllRecipesController" automaticallyAdjustsScrollViewInsets="NO" id="Jyc-8o-bAh" customClass="AllRecipesViewController" customModule="iosDevelopmentA3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CHj-Kn-xoV">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
