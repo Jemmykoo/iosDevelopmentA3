@@ -20,13 +20,13 @@ class NewIngredientController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        ingredientNameTextField.delegate = self
     }
 
     @IBAction func addNewItem(_ sender: UIButton) {
 
         loadIngredients()
-        var ingredientName = ingredientNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let ingredientName = ingredientNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         var hasIngredient = false
 
@@ -48,19 +48,28 @@ class NewIngredientController: UIViewController {
                 feedbackLabel.text = "Ingredient Added"
             }
         } else {
-            feedbackLabel.text = "Ingredient Exists"
+            feedbackLabel.text = "Ingredient already exists"
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { self.feedbackLabel.text = "" }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) { self.feedbackLabel.text = " " }
     }
 
     func loadIngredients() {
         ingredientListArray.removeAll()
-        let data = realm.objects(Ingredient.self)
+        let ingredients = realm.objects(Ingredient.self)
 
-        for item in data {
+        for item in ingredients {
             ingredientListArray.append(item)
         }
+    }
+}
+extension NewIngredientController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentString = (textField.text ?? "") as NSString
+        let replacementString = currentString.replacingCharacters(in: range, with: string)
+
+        return replacementString.count <= 26
     }
 }
 
