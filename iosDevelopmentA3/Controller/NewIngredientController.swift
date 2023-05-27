@@ -26,20 +26,21 @@ class NewIngredientController: UIViewController {
     @IBAction func addNewItem(_ sender: UIButton) {
 
         loadIngredients()
-        let ingredientName = ingredientNameTextField.text!
-        let newIngredient = Ingredient(ingredientName, 1, false)
+        var ingredientName = ingredientNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
         var hasIngredient = false
 
         for item in ingredientListArray {
-            if(item.name.lowercased() == newIngredient.name.lowercased()) {
+            if(item.name.lowercased() == ingredientName.lowercased()) {
                 hasIngredient = true
             }
         }
-
+        
         if (hasIngredient == false) {
-            if newIngredient.name == "" {
+            if ingredientName == "" {
                 feedbackLabel.text = "Please enter name"
             } else {
+                let newIngredient = Ingredient(ingredientName, 1, false)
                 try! realm.write {
                     realm.add(newIngredient)
                 }

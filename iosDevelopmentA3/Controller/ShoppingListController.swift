@@ -101,11 +101,13 @@ extension ShoppingListController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         if shoppingListItemsArray[indexPath.row].quantity > 1 {
-            cell.textLabel?.text = "\(shoppingListItemsArray[indexPath.row].name) (\(shoppingListItemsArray[indexPath.row].quantity))"
+            cell.textLabel?.text = "\(shoppingListItemsArray[indexPath.row].name)"
+            cell.detailTextLabel?.text = "(\(shoppingListItemsArray[indexPath.row].quantity))"
         } else {
             cell.textLabel?.text = "\(shoppingListItemsArray[indexPath.row].name)"
+            cell.detailTextLabel?.text = ""
         }
-
+        
         if shoppingListItemsArray[indexPath.row].isCheckedOff {
             cell.accessoryType = .checkmark
         } else {
@@ -113,5 +115,37 @@ extension ShoppingListController: UITableViewDataSource {
         }
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+
+        return .delete
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+
+        if(.delete == editingStyle) {
+
+            let cell = tableView.cellForRow(at: indexPath)!
+            let ingredients = realm.objects(Ingredient.self)
+            var ingName = cell.textLabel?.text
+           
+            
+            for item in ingredients {
+                if item.name == ingName {
+                    try! realm.write {
+                        item.isCheckedOff = false
+                        item.isInShoppingList = false
+                        item.quantity = 1
+                    }
+                    break
+                }
+            }
+
+            shoppingListTableView.beginUpdates()
+            shoppingListItemsArray.remove(at: indexPath.row)
+            shoppingListTableView.deleteRows(at: [indexPath], with: .fade)
+            shoppingListTableView.endUpdates()
+        }
     }
 }
