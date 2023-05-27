@@ -76,8 +76,6 @@ class ShoppingListController: UIViewController {
         shoppingListItemsArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
         shoppingListTableView.reloadData()
     }
-
-
 }
 
 
@@ -112,7 +110,7 @@ extension ShoppingListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
+        
         if shoppingListItemsArray[indexPath.row].quantity > 1 {
             cell.textLabel?.text = "\(shoppingListItemsArray[indexPath.row].name)"
             cell.detailTextLabel?.text = "(\(shoppingListItemsArray[indexPath.row].quantity))"
@@ -141,9 +139,8 @@ extension ShoppingListController: UITableViewDataSource {
 
             let cell = tableView.cellForRow(at: indexPath)!
             let ingredients = realm.objects(Ingredient.self)
-            var ingName = cell.textLabel?.text
+            let ingName = cell.textLabel?.text
            
-            
             for item in ingredients {
                 if item.name == ingName {
                     try! realm.write {
