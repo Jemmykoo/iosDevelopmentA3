@@ -72,9 +72,9 @@ class IngredientListController: UIViewController {
 
         ingredientListArray.removeAll()
 
-        let data = realm.objects(Ingredient.self)
+        let ingredients = realm.objects(Ingredient.self)
 
-        for item in data {
+        for item in ingredients {
 
             ingredientListArray.append(item)
         }
@@ -86,7 +86,10 @@ class IngredientListController: UIViewController {
     }
 
     func writeDefaultIngredients() {
-        if(realm.isEmpty) {
+       
+        let ingredients = realm.objects(Ingredient.self)
+        
+        if(ingredients.isEmpty) {
 
             for item in ingredientNameArray {
                 let ingredient = Ingredient(item, 1, false)
