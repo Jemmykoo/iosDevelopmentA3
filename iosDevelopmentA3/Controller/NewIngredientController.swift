@@ -21,6 +21,7 @@ class NewIngredientController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ingredientNameTextField.delegate = self
+        addNewItemButton.layer.cornerRadius = 10
     }
 
     @IBAction func addNewItem(_ sender: UIButton) {

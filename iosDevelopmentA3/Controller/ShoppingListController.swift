@@ -38,16 +38,29 @@ class ShoppingListController: UIViewController {
 
     @IBAction func clearShoppingList(_ sender: UIButton) {
 
-        for item in shoppingListItemsArray {
-            realm.beginWrite()
-            item.isInShoppingList = false
-            item.isCheckedOff = false
-            item.quantity = 1
-            try! realm.commitWrite()
-        }
+        let alert = UIAlertController(title: "Warning", message: "Are you Sure you want to clear list", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Default action"), style: .default, handler: { [self] _ in
+      
+            for item in shoppingListItemsArray {
+                realm.beginWrite()
+                item.isInShoppingList = false
+                item.isCheckedOff = false
+                item.quantity = 1
+                try! realm.commitWrite()
+            }
 
-        loadShoppingList()
-        shoppingListTableView.reloadData()
+            loadShoppingList()
+            shoppingListTableView.reloadData()
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "Default action"), style: .default, handler: { _ in
+        
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
     }
 
     func loadShoppingList() {
