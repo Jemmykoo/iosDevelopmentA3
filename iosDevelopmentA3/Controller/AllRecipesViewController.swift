@@ -61,7 +61,6 @@ class AllRecipesViewController: UIViewController {
             let ingredients  = List<Ingredient>()
             let recipe = Recipe("Apple Pie",ingredients,steps)
             
-            
             try! realm.write {
                 realm.add(recipe)
             }
@@ -116,7 +115,7 @@ extension AllRecipesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Table View Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = allRecipesArray[indexPath.row].name
         if(hasSearched) {
             cell.textLabel?.text = allRecipesArraySearch[indexPath.row].name
