@@ -34,7 +34,6 @@ class AddRecipeViewController: UIViewController {
         newRecipeMultiSelect.delegate = self
         newRecipeMultiSelect.dataSource = self
         newRecipeSearchBar.delegate = self
-        // Do any additional setup after loading the view.
     }
     
     func loadIngredients() {
@@ -47,6 +46,31 @@ class AddRecipeViewController: UIViewController {
         
         ingredientListArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
         newRecipeMultiSelect.reloadData()
+    }
+    
+    @IBAction func saveRecipe(_ sender: Any) {
+        let newRecipeName = newRecipeNameField.text!
+        let newRecipeSteps = newRecipeStepsField.text!
+        if newRecipeName == ""  || newRecipeSteps == "" ||  selectedIngredientListArray.count < 1 {
+            print("Error message here")
+            return
+        }
+        let newRecipeIngredients = generateIngredientsList()
+        let recipeToSave = Recipe(newRecipeName, newRecipeIngredients, newRecipeSteps)
+        try! realm.write {
+            realm.add(recipeToSave)
+        }
+    }
+    
+    func generateIngredientsList() -> List<Ingredient>{
+        
+        let ingredients = List<Ingredient>()
+        for item in ingredientListArray {
+            if selectedIngredientListArray.contains(item.name) {
+                ingredients.append(item)
+            }
+        }
+        return ingredients
     }
 }
 
