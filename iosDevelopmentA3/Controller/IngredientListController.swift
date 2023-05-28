@@ -41,7 +41,15 @@ class IngredientListController: UIViewController {
             item.layer.cornerRadius = 10
         }
     }
-
+    
+    
+    @IBAction func clickedAddMissingIngredient(_ sender: UIButton) {
+        searchBar(self.searchBar, textDidChange: "")
+        searchBar.text = ""
+        hasSearched = false
+        ingredientListArraySearch.removeAll()
+    }
+    
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
 
         if selectedIngredientListArray.isEmpty {
@@ -80,7 +88,6 @@ class IngredientListController: UIViewController {
     func loadIngredients() {
 
         ingredientListArray.removeAll()
-
         let ingredients = realm.objects(Ingredient.self)
 
         for item in ingredients {
@@ -123,7 +130,8 @@ extension IngredientListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
         let cell = tableView.cellForRow(at: indexPath)!
-
+        var testing = selectedIngredientListArray
+        
         var count = 0
         for item in selectedIngredientListArray {
             if item == cell.textLabel?.text {
