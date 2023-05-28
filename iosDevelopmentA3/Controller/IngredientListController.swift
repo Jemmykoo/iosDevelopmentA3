@@ -50,7 +50,7 @@ class IngredientListController: UIViewController {
     }
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
 
-        loadIngredients()
+        loadSelectedIngredients()
 
         if selectedIngredientListArray.isEmpty {
             let alert = UIAlertController(title: "No items selected", message: "", preferredStyle: .alert)
