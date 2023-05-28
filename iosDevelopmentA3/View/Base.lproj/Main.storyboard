@@ -95,7 +95,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Xh7-cJ-943">
-                                <rect key="frame" x="0.0" y="159" width="393" height="512"/>
+                                <rect key="frame" x="0.0" y="159" width="393" height="609"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="hBO-mi-2EB">
@@ -109,7 +109,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A50-0w-hx4">
-                                <rect key="frame" x="0.0" y="681" width="393" height="30"/>
+                                <rect key="frame" x="0.0" y="778" width="393" height="30"/>
                                 <color key="backgroundColor" systemColor="tintColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -138,7 +138,7 @@
                             <constraint firstItem="JlU-ch-3Vk" firstAttribute="trailing" secondItem="xcj-Uh-uHa" secondAttribute="trailing" id="YQ1-P2-BCa"/>
                             <constraint firstItem="JlU-ch-3Vk" firstAttribute="trailing" secondItem="Xh7-cJ-943" secondAttribute="trailing" id="gJP-Oc-09O"/>
                             <constraint firstItem="xcj-Uh-uHa" firstAttribute="leading" secondItem="JlU-ch-3Vk" secondAttribute="leading" id="hTj-En-OAX"/>
-                            <constraint firstItem="JlU-ch-3Vk" firstAttribute="bottom" secondItem="A50-0w-hx4" secondAttribute="bottom" constant="107" id="k70-et-XKb"/>
+                            <constraint firstItem="JlU-ch-3Vk" firstAttribute="bottom" secondItem="A50-0w-hx4" secondAttribute="bottom" constant="10" id="k70-et-XKb"/>
                             <constraint firstItem="xcj-Uh-uHa" firstAttribute="leading" secondItem="JlU-ch-3Vk" secondAttribute="leading" id="zL4-GO-j3Y"/>
                         </constraints>
                     </view>
@@ -185,7 +185,7 @@
                                 <rect key="frame" x="0.0" y="605.33333333333337" width="393" height="172.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Recipe Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPD-il-6oa">
-                                        <rect key="frame" x="124.33333333333333" y="0.0" width="144.33333333333337" height="20.333333333333332"/>
+                                        <rect key="frame" x="124.33333333333331" y="0.0" width="144.33333333333337" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

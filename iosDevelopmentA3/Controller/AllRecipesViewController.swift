@@ -162,7 +162,7 @@ extension AllRecipesViewController: UITableViewDataSource {
         if(.delete == editingStyle) {
             
             let cell = tableView.cellForRow(at: indexPath)!
-            let data = realm.objects(Ingredient.self)
+            let data = realm.objects(Recipe.self)
             
             for item in data {
                 
