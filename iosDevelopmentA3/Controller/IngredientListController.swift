@@ -16,18 +16,15 @@ class IngredientListController: UIViewController {
     @IBOutlet weak var ingredientListTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
 
-    
     let realm = try! Realm()
     var ingredientListArray: [Ingredient] = []
     var ingredientListArraySearch: [Ingredient] = []
-    var selectedIngredientListArray: [String] = []
+    var selectedIngredientListArray: [Ingredient] = []
     var hasSearched = false
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         loadIngredients()
-
     }
 
     override func viewDidLoad() {
@@ -36,46 +33,72 @@ class IngredientListController: UIViewController {
         ingredientListTableView.delegate = self
         ingredientListTableView.dataSource = self
         searchBar.delegate = self
+        resetSelected()
 
         for item in buttonsStyling {
             item.layer.cornerRadius = 10
         }
     }
-    
+    func loadSelectedIngredients() {
+        selectedIngredientListArray.removeAll()
+        for item in ingredientListArray
+        {
+            if item.isSelected {
+                selectedIngredientListArray.append(item)
+            }
+        }
+    }
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
+
+        loadIngredients()
 
         if selectedIngredientListArray.isEmpty {
             let alert = UIAlertController(title: "No items selected", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
-                //do nothing
-            }))
+                    //do nothing
+                }))
             self.present(alert, animated: true, completion: nil)
-            
+
         } else {
-            
+
             let alert = UIAlertController(title: "Successfully Added", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { [self] _ in
-          
-                for ingredientName in selectedIngredientListArray {
-                    for item in ingredientListArray {
-                        if(item.name == ingredientName) {
 
-                            realm.beginWrite()
-                            if(item.isInShoppingList) {
-                                item.quantity += 1
-                            } else {
-                                item.isInShoppingList = true
+                    for ingredient in selectedIngredientListArray {
+                        for item in ingredientListArray {
+                            if(item.name == ingredient.name) {
+
+                                realm.beginWrite()
+                                if(item.isInShoppingList) {
+                                    item.quantity += 1
+                                } else {
+                                    item.isInShoppingList = true
+                                }
+                                try! realm.commitWrite()
                             }
-                            try! realm.commitWrite()
                         }
                     }
-                }
-                
-            }))
+
+                }))
             self.present(alert, animated: true, completion: nil)
         }
     }
 
+    func resetSelected()
+    {
+        let ingredients = realm.objects(Ingredient.self)
+        let selectedIngredients = ingredients.where {
+            $0.isSelected == true
+        }
+
+        for item in selectedIngredients
+        {
+            try! realm.write {
+                item.isSelected = false
+            }
+
+        }
+    }
 
     func loadIngredients() {
 
@@ -88,12 +111,9 @@ class IngredientListController: UIViewController {
         }
 
         ingredientListArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
-
         searchBar(self.searchBar, textDidChange: searchBar.text!)
         ingredientListTableView.reloadData()
     }
-
-   
 }
 
 extension IngredientListController: UISearchBarDelegate {
@@ -114,25 +134,35 @@ extension IngredientListController: UISearchBarDelegate {
 extension IngredientListController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var ingredient = Ingredient()
 
-        let cell = tableView.cellForRow(at: indexPath)!
-        selectedIngredientListArray.append((cell.textLabel?.text)!)
+        if hasSearched {
+            ingredient = ingredientListArraySearch[indexPath.row]
+        } else {
+            ingredient = ingredientListArray[indexPath.row]
+        }
+
+        try! realm.write {
+            ingredient.isSelected = true
+        }
 
     }
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        var ingredient = Ingredient()
 
-        let cell = tableView.cellForRow(at: indexPath)!
-        
-        var count = 0
-        for item in selectedIngredientListArray {
-            if item == cell.textLabel?.text {
-                selectedIngredientListArray.remove(at: count)
-            }
+        if hasSearched {
+            ingredient = ingredientListArraySearch[indexPath.row]
+        } else {
+            ingredient = ingredientListArray[indexPath.row]
+        }
 
-            count += 1
+        try! realm.write {
+            ingredient.isSelected = false
         }
     }
+
+
 }
 
 extension IngredientListController: UITableViewDataSource {
@@ -152,10 +182,23 @@ extension IngredientListController: UITableViewDataSource {
 
         if(hasSearched) {
             cell.textLabel?.text = ingredientListArraySearch[indexPath.row].name
+
+            if ingredientListArraySearch[indexPath.row].isSelected {
+                cell.setSelected(true, animated: true)
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
+
+        } else {
+            if ingredientListArray[indexPath.row].isSelected {
+                cell.setSelected(true, animated: true)
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
         }
 
         return cell
     }
+
+
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
 
