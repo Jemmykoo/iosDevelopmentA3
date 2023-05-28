@@ -11,6 +11,10 @@ import RealmSwift
 
 class SingleRecipeViewController: UIViewController {
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var allIngredientsLabel: UILabel!
+    @IBOutlet weak var stepsLabel: UILabel!
+    
     var name : String = ""
     var ingredients : List<Ingredient> = List<Ingredient>()
     var steps = ""
@@ -18,8 +22,10 @@ class SingleRecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .red
-        print("name is \(name)")
-        // Do any additional setup after loading the view.
+        nameLabel.text = name
+        allIngredientsLabel.text = "All ingredients steps "
+        stepsLabel.numberOfLines = 10
+        stepsLabel.text = steps
     }
 
 

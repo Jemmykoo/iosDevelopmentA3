@@ -12,7 +12,7 @@ class Recipe : Object {
 
     @objc dynamic var name: String = ""
     var ingredients  = List<Ingredient>()
-    var steps : String = ""
+    @objc dynamic var steps : String = ""
 
     convenience init(_ name: String ,_ ingredients : List<Ingredient>, _ steps: String) {
         self.init()
