@@ -16,6 +16,7 @@ class AllRecipesViewController: UIViewController {
     @IBOutlet weak var allRecipesSearchBar: UISearchBar!
     
     let realm = try! Realm()
+    
     var allRecipesArray: [Recipe] = [Recipe]()
     var allRecipesArraySearch: [Recipe] = []
     var selectedRecipeListArray: [String] = []
@@ -60,7 +61,7 @@ class AllRecipesViewController: UIViewController {
             let steps = "mix then bake"
             let ingredients  = List<Ingredient>()
             let recipe = Recipe("Apple Pie",ingredients,steps)
-            
+
             try! realm.write {
                 realm.add(recipe)
             }
@@ -84,27 +85,41 @@ class AllRecipesViewController: UIViewController {
         }
     }
 
-    extension AllRecipesViewController: UITableViewDelegate {
+extension AllRecipesViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SingleRecipeVC") as! SingleRecipeViewController
+        var name = "Recipe Name"
+        var ingredients = List<Ingredient>()
+        var steps = "STEPS"
 
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-            let cell = tableView.cellForRow(at: indexPath)!
-            selectedRecipeListArray.append((cell.textLabel?.text)!)
-
+        if allRecipesArraySearch.count > 0 {
+            name = allRecipesArraySearch[indexPath.row].name
+            ingredients = allRecipesArraySearch[indexPath.row].ingredients
+            steps = allRecipesArraySearch[indexPath.row].steps
+        } else {
+            name = allRecipesArray[indexPath.row].name
+            ingredients = allRecipesArray[indexPath.row].ingredients
+            steps = allRecipesArray[indexPath.row].steps
         }
-
-        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-
-            let cell = tableView.cellForRow(at: indexPath)!
-            var count = 0
-            for item in selectedRecipeListArray {
-                if item == cell.textLabel?.text {
-                    selectedRecipeListArray.remove(at: count)
-                }
-                count += 1
-            }
-        }
+        
+        vc.name = name
+        vc.ingredients = ingredients
+        vc.steps = steps
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+}
+//            let cell = tableView.cellForRow(at: indexPath)!
+            
+                  // Navigate on other view
+               
+//            var count = 0
+//            for item in selectedRecipeListArray {
+//                if item == cell.textLabel?.text {
+//                    selectedRecipeListArray.remove(at: count)
+//                }
+//                count += 1
+//            }
 
 extension AllRecipesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -144,6 +159,7 @@ extension AllRecipesViewController: UITableViewDataSource {
                 }
             }
             allRecipesTableView.beginUpdates()
+            
             if(hasSearched) {
                 let itemToRemove = allRecipesArraySearch[indexPath.row]
                 let itemToRemoveIndex = allRecipesArray.firstIndex(of: itemToRemove)!
@@ -152,6 +168,7 @@ extension AllRecipesViewController: UITableViewDataSource {
             } else {
                 allRecipesArray.remove(at: indexPath.row)
             }
+            
             allRecipesTableView.deleteRows(at: [indexPath], with: .fade)
             allRecipesTableView.endUpdates()
         }

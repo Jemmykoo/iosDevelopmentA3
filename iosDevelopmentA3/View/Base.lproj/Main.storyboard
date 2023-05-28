@@ -137,10 +137,10 @@
             </objects>
             <point key="canvasLocation" x="1973.2824427480916" y="475.35211267605638"/>
         </scene>
-        <!--New Recipe View Controller-->
+        <!--Add Recipe View Controller-->
         <scene sceneID="66h-du-ujJ">
             <objects>
-                <viewController storyboardIdentifier="NewRecipeController" id="fZw-z5-fI0" customClass="newRecipeViewController" customModule="iosDevelopmentA3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewRecipeController" id="fZw-z5-fI0" customClass="AddRecipeViewController" customModule="iosDevelopmentA3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b0F-tL-Ftp">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -206,6 +206,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zdy-q3-jrY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2977.8625954198474" y="474.64788732394368"/>
+        </scene>
+        <!--Single Recipe View Controller-->
+        <scene sceneID="9ar-D4-FbR">
+            <objects>
+                <viewController storyboardIdentifier="SingleRecipeVC" id="9qX-fO-OEg" customClass="SingleRecipeViewController" customModule="iosDevelopmentA3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nSz-Hd-qUD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="3E1-sh-0UA"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CXZ-a7-2Yq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1973" y="1156"/>
         </scene>
         <!--Shopping List-->
         <scene sceneID="xwe-Kq-9gt">
