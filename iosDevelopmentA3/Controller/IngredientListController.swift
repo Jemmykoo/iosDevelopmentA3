@@ -42,14 +42,6 @@ class IngredientListController: UIViewController {
         }
     }
     
-    
-    @IBAction func clickedAddMissingIngredient(_ sender: UIButton) {
-        searchBar(self.searchBar, textDidChange: "")
-        searchBar.text = ""
-        hasSearched = false
-        ingredientListArraySearch.removeAll()
-    }
-    
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
 
         if selectedIngredientListArray.isEmpty {
@@ -97,6 +89,7 @@ class IngredientListController: UIViewController {
 
         ingredientListArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
 
+        searchBar(self.searchBar, textDidChange: searchBar.text!)
         ingredientListTableView.reloadData()
     }
 
@@ -130,7 +123,6 @@ extension IngredientListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 
         let cell = tableView.cellForRow(at: indexPath)!
-        var testing = selectedIngredientListArray
         
         var count = 0
         for item in selectedIngredientListArray {
