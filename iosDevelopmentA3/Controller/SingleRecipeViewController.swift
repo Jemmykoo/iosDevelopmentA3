@@ -21,11 +21,21 @@ class SingleRecipeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .red
-        nameLabel.text = name
-        allIngredientsLabel.text = "All ingredients steps "
+        let ingredientString : String = loadIngredients()
         stepsLabel.numberOfLines = 10
-        stepsLabel.text = steps
+        allIngredientsLabel.numberOfLines = 10
+        nameLabel.text = "Recipe Name: \(name)"
+        allIngredientsLabel.text = "Ingredients:\(ingredientString) "
+        stepsLabel.text = "Steps:\n\(steps)"
+    }
+    
+    func loadIngredients() -> String{
+        var ingredientString:String = ""
+        for item in ingredients{
+            ingredientString = "\(ingredientString)\n- \(item.name)"
+        }
+        print("\(ingredientString) is the ingredient string")
+        return ingredientString
     }
 
 

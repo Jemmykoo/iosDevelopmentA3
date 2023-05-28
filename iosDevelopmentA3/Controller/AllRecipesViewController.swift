@@ -60,13 +60,26 @@ class AllRecipesViewController: UIViewController {
         print(recipes)
         if recipes.count < 1 {
             let steps = "1. Cut up the apples \n2. Add your pastry to the pie tin \n3. Add your apples to the pie tin \n3. Bake at 180"
-            let ingredients  = List<Ingredient>()
+            let ingredients  = applePieIngredients()
             let recipe = Recipe("Apple Pie",ingredients,steps)
             try! realm.write {
                 realm.add(recipe)
             }
         }
         
+    }
+    
+    func applePieIngredients() -> List<Ingredient>{
+        let ingredients = realm.objects(Ingredient.self)
+        let applePieIngredients = List<Ingredient>()
+        if ingredients.count > 0 {
+            for item in ingredients{
+                if item.name == "Apple" || item.name == "Pastry" || item.name == "Sugar" || item.name == "Cinnamon" {
+                    applePieIngredients.append(item)
+                }
+            }
+        }
+        return applePieIngredients
     }
 }
 

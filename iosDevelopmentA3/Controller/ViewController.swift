@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         //print(Realm.Configuration.defaultConfiguration.fileURL)
-        deleteRealmDataTestingFunctionality()
+//        deleteRealmDataTestingFunctionality()
 
         for item in buttonsStyling {
             item.layer.cornerRadius = 10
