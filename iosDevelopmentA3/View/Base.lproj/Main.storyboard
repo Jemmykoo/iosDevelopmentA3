@@ -196,7 +196,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="VVw-0c-rYx"/>
                     <connections>
-                        <outlet property="newRceipeMultiSelect" destination="aZl-gS-TET" id="u0W-ab-IgL"/>
+                        <outlet property="newRecipeMultiSelect" destination="aZl-gS-TET" id="fnk-Gy-7NW"/>
                         <outlet property="newRecipeNameField" destination="G7U-c6-xyO" id="vI4-3c-xYe"/>
                         <outlet property="newRecipeSaveButton" destination="pCM-5P-2Vp" id="tCN-LD-j27"/>
                         <outlet property="newRecipeSearchBar" destination="dTH-nR-uwx" id="3CE-Xs-pyV"/>
