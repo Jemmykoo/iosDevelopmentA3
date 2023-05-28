@@ -237,7 +237,6 @@
                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickedAddMissingIngredient:" destination="uGg-vn-ZGa" eventType="touchUpInside" id="uba-TO-acu"/>
                                     <segue destination="eME-Ox-hnc" kind="show" id="cvt-Dm-NOf"/>
                                 </connections>
                             </button>
