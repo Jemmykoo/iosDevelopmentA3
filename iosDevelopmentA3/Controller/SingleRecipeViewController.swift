@@ -34,7 +34,6 @@ class SingleRecipeViewController: UIViewController {
         for item in ingredients{
             ingredientString = "\(ingredientString)\n- \(item.name)"
         }
-        print("\(ingredientString) is the ingredient string")
         return ingredientString
     }
 
