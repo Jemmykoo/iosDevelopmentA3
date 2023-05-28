@@ -22,10 +22,6 @@ class ShoppingListController: UIViewController {
         loadShoppingList()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         shoppingListTableView.delegate = self
@@ -38,7 +34,12 @@ class ShoppingListController: UIViewController {
 
     @IBAction func clearShoppingList(_ sender: UIButton) {
 
-        let alert = UIAlertController(title: "Warning", message: "Are you Sure you want to clear list", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Warning", message: "Are you sure you want to clear shopping list", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "Default action"), style: .default, handler: { _ in
+            //do nothing
+        }))
+        
         alert.addAction(UIAlertAction(title: NSLocalizedString("Yes", comment: "Default action"), style: .default, handler: { [self] _ in
       
             for item in shoppingListItemsArray {
@@ -54,13 +55,7 @@ class ShoppingListController: UIViewController {
             
         }))
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("No", comment: "Default action"), style: .default, handler: { _ in
-        
-        }))
-        
         self.present(alert, animated: true, completion: nil)
-        
-        
     }
 
     func loadShoppingList() {

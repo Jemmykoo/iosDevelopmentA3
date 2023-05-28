@@ -16,13 +16,7 @@ class IngredientListController: UIViewController {
     @IBOutlet weak var ingredientListTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var ingredientNameArray: [String] = ["Bread", "Egg", "Milk", "Apple", "Avacado", "Almond", "Apple juice", "Bannana", "Bacon",
-        "Babaganoosh", "Arugala", "Artichoke", "Bruscetta", "Bagel", "Baked beans", "Black beans",
-        "Corn", "Melon", "Mango", "Cherries", "Broccoli", "Cabbage", "Greek Yogurt", "Yogurt", "Blue Cheese",
-        "Pineapple", "Plums", "Black Olives", "Green Olives", "Tuna", "Smoked Salmon", "Salmon", "Pasta",
-        "Spagetti", "Red Onion", "Onion", "Soy sauce", "Parmesan Cheese", "Oregano", "Olive oil", "Vegetable oil",
-        "Sessame oil", "White rice", "Brown rice", "Potato", "Peas", "Zucchini", "Zaartar", "Labneh", "Hummus", "Feta",
-        "Sausages", "Lettuce", "Tomatos", "Cucumber"]
+    
     let realm = try! Realm()
     var ingredientListArray: [Ingredient] = []
     var ingredientListArraySearch: [Ingredient] = []
@@ -32,7 +26,6 @@ class IngredientListController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        writeDefaultIngredients()
         loadIngredients()
 
     }
@@ -51,19 +44,35 @@ class IngredientListController: UIViewController {
 
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
 
-        for ingredientName in selectedIngredientListArray {
-            for item in ingredientListArray {
-                if(item.name == ingredientName) {
+        if selectedIngredientListArray.isEmpty {
+            let alert = UIAlertController(title: "No items selected", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                //do nothing
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
+        } else {
+            
+            let alert = UIAlertController(title: "Successfully Added", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { [self] _ in
+          
+                for ingredientName in selectedIngredientListArray {
+                    for item in ingredientListArray {
+                        if(item.name == ingredientName) {
 
-                    realm.beginWrite()
-                    if(item.isInShoppingList) {
-                        item.quantity += 1
-                    } else {
-                        item.isInShoppingList = true
+                            realm.beginWrite()
+                            if(item.isInShoppingList) {
+                                item.quantity += 1
+                            } else {
+                                item.isInShoppingList = true
+                            }
+                            try! realm.commitWrite()
+                        }
                     }
-                    try! realm.commitWrite()
                 }
-            }
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
@@ -79,27 +88,12 @@ class IngredientListController: UIViewController {
             ingredientListArray.append(item)
         }
 
-        //sort
         ingredientListArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
 
         ingredientListTableView.reloadData()
     }
 
-    func writeDefaultIngredients() {
-       
-        let ingredients = realm.objects(Ingredient.self)
-        
-        if(ingredients.isEmpty) {
-
-            for item in ingredientNameArray {
-                let ingredient = Ingredient(item, 1, false)
-
-                try! realm.write {
-                    realm.add(ingredient)
-                }
-            }
-        }
-    }
+   
 }
 
 extension IngredientListController: UISearchBarDelegate {
@@ -159,7 +153,6 @@ extension IngredientListController: UITableViewDataSource {
         if(hasSearched) {
             cell.textLabel?.text = ingredientListArraySearch[indexPath.row].name
         }
-
 
         return cell
     }
