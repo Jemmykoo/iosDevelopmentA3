@@ -14,9 +14,9 @@ class AddRecipeViewController: UIViewController {
     
     @IBOutlet weak var newRecipeNameField: UITextField!
     @IBOutlet weak var newRecipeSearchBar: UISearchBar!
-    @IBOutlet weak var newRecipeStepsField: UITextField!
     @IBOutlet weak var newRecipeSaveButton: UIButton!
     @IBOutlet weak var newRecipeMultiSelect: UITableView!
+    @IBOutlet weak var newRecipeStepsView: UITextView!
     
     let realm = try! Realm()
     var ingredientListArray: [Ingredient] = []
@@ -50,7 +50,7 @@ class AddRecipeViewController: UIViewController {
     
     @IBAction func saveRecipe(_ sender: Any) {
         let newRecipeName = newRecipeNameField.text!
-        let newRecipeSteps = newRecipeStepsField.text!
+        let newRecipeSteps = newRecipeStepsView.text!
         if newRecipeName == ""  || newRecipeSteps == "" ||  selectedIngredientListArray.count < 1 {
             print("Error message here")
             return
@@ -59,6 +59,7 @@ class AddRecipeViewController: UIViewController {
         let recipeToSave = Recipe(newRecipeName, newRecipeIngredients, newRecipeSteps)
         try! realm.write {
             realm.add(recipeToSave)
+            navigationController?.popViewController(animated: true)
         }
     }
     
