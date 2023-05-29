@@ -53,6 +53,10 @@ class SingleRecipeViewController: UIViewController {
             }
 
         }
+        let alert = UIAlertController(title: "The ingredients in this recipe have all been added to your shopping list.", message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

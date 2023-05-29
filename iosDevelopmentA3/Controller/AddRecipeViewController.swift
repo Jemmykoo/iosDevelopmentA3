@@ -80,15 +80,33 @@ class AddRecipeViewController: UIViewController {
         let newRecipeName = newRecipeNameField.text!
         let newRecipeSteps = newRecipeStepsView.text!
         if newRecipeName == ""  || newRecipeSteps == "" ||  selectedIngredientListArray.count < 1 {
-            print("Error message here")
-            return
+            let alert = UIAlertController(title: "Please select your ingredients, fill out the steps and name your recipe.", message: "", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                            }))
+            self.present(alert, animated: true, completion: nil)
+        } else if recipeNameIsUsed() == true {
+            let alert = UIAlertController(title: "Please name your recipe something unique.", message: "", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let newRecipeIngredients = generateIngredientsList()
+            let recipeToSave = Recipe(newRecipeName, newRecipeIngredients, newRecipeSteps)
+            try! realm.write {
+                realm.add(recipeToSave)
+                navigationController?.popViewController(animated: true)
+            }
         }
-        let newRecipeIngredients = generateIngredientsList()
-        let recipeToSave = Recipe(newRecipeName, newRecipeIngredients, newRecipeSteps)
-        try! realm.write {
-            realm.add(recipeToSave)
-            navigationController?.popViewController(animated: true)
+    }
+    
+    func recipeNameIsUsed() -> Bool {
+        let data = realm.objects(Recipe.self)
+        for item in data {
+            if item.name == newRecipeNameField.text! {
+                return true
+            }
         }
+        return false
     }
     
     func generateIngredientsList() -> List<Ingredient>{

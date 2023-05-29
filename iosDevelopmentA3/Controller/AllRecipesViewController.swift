@@ -57,7 +57,6 @@ class AllRecipesViewController: UIViewController {
     
     func writeDefaultRecipes() {
         let recipes = realm.objects(Recipe.self)
-        print(recipes)
         if recipes.count < 1 {
             let steps = "1. Cut up the apples \n2. Add your pastry to the pie tin \n3. Add your apples to the pie tin \n3. Bake at 180"
             let ingredients  = applePieIngredients()
@@ -107,12 +106,10 @@ extension AllRecipesViewController: UITableViewDelegate {
         var steps = "STEPS"
 
         if allRecipesArraySearch.count > 0 {
-            print(allRecipesArraySearch[indexPath.row])
             name = allRecipesArraySearch[indexPath.row].name
             ingredients = allRecipesArraySearch[indexPath.row].ingredients
             steps = allRecipesArraySearch[indexPath.row].steps
         } else {
-            print(allRecipesArray[indexPath.row])
             name = allRecipesArray[indexPath.row].name
             ingredients = allRecipesArray[indexPath.row].ingredients
             steps = allRecipesArray[indexPath.row].steps
