@@ -39,6 +39,8 @@ class IngredientListController: UIViewController {
             item.layer.cornerRadius = 10
         }
     }
+    
+    // append all ingredients that have isSelected = true into selectedIngredientArray
     func loadSelectedIngredients() {
         selectedIngredientListArray.removeAll()
         for item in ingredientListArray
@@ -48,6 +50,8 @@ class IngredientListController: UIViewController {
             }
         }
     }
+    
+    // if selected ingredients is empty do nothing, otherwise if ingredient is in shopping list, increment quantity, if it's not, then set isInShoppingList true
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
 
         loadSelectedIngredients()
@@ -55,7 +59,7 @@ class IngredientListController: UIViewController {
         if selectedIngredientListArray.isEmpty {
             let alert = UIAlertController(title: "No items selected", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
-                    //do nothing
+                    // no items selected
                 }))
             self.present(alert, animated: true, completion: nil)
 
@@ -65,18 +69,13 @@ class IngredientListController: UIViewController {
             alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { [self] _ in
 
                     for ingredient in selectedIngredientListArray {
-                        for item in ingredientListArray {
-                            if(item.name == ingredient.name) {
-
-                                realm.beginWrite()
-                                if(item.isInShoppingList) {
-                                    item.quantity += 1
-                                } else {
-                                    item.isInShoppingList = true
-                                }
-                                try! realm.commitWrite()
-                            }
+                        realm.beginWrite()
+                        if(ingredient.isInShoppingList) {
+                            ingredient.quantity += 1
+                        } else {
+                            ingredient.isInShoppingList = true
                         }
+                        try! realm.commitWrite()
                     }
 
                 }))
@@ -84,6 +83,7 @@ class IngredientListController: UIViewController {
         }
     }
 
+    //reset selected ingredients ( set isSelected to false on all ingredients that are currently true)
     func resetSelected()
     {
         let ingredients = realm.objects(Ingredient.self)
@@ -100,23 +100,25 @@ class IngredientListController: UIViewController {
         }
     }
 
+    // load all ingredients from realm into ingredientListArray - sort them
     func loadIngredients() {
 
         ingredientListArray.removeAll()
         let ingredients = realm.objects(Ingredient.self)
 
         for item in ingredients {
-
             ingredientListArray.append(item)
         }
 
         ingredientListArray.sort(by: { $0.name.lowercased() < $1.name.lowercased() })
+        //reset search bar to current searchbar.text, this fixed issue where tableview wouldn't show recently added ingredient if searching
         searchBar(self.searchBar, textDidChange: searchBar.text!)
         ingredientListTableView.reloadData()
     }
 }
 
 extension IngredientListController: UISearchBarDelegate {
+    //set hasSearched to true, if searchText is empty, ingredientListArraySearch is a copy of ingredientListArray, otherwise IngredientListArraySearch contains filtered data according to searchTextt ignoring capitalisation
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         hasSearched = true
@@ -133,6 +135,7 @@ extension IngredientListController: UISearchBarDelegate {
 
 extension IngredientListController: UITableViewDelegate {
 
+    // when user selects cell, set the corisponding ingredients IsSelected property to true
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var ingredient = Ingredient()
 
@@ -148,6 +151,7 @@ extension IngredientListController: UITableViewDelegate {
 
     }
 
+    // when user selects cell, set the corisponding ingredients IsSelected property to false
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         var ingredient = Ingredient()
 
@@ -161,10 +165,9 @@ extension IngredientListController: UITableViewDelegate {
             ingredient.isSelected = false
         }
     }
-
-
 }
 
+// return arrays count for number of rows in tableview dpending on if search is true or false
 extension IngredientListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -175,6 +178,7 @@ extension IngredientListController: UITableViewDataSource {
         return ingredientListArray.count
     }
 
+    // populate cell depending on if search is true / false. Also set selected depending if ingredient isSelected is true / false
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -184,13 +188,12 @@ extension IngredientListController: UITableViewDataSource {
             cell.textLabel?.text = ingredientListArraySearch[indexPath.row].name
 
             if ingredientListArraySearch[indexPath.row].isSelected {
-                cell.setSelected(true, animated: true)
+                cell.setSelected(true, animated: false)
                 tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             }
-
         } else {
             if ingredientListArray[indexPath.row].isSelected {
-                cell.setSelected(true, animated: true)
+                cell.setSelected(true, animated: false)
                 tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             }
         }
@@ -198,13 +201,12 @@ extension IngredientListController: UITableViewDataSource {
         return cell
     }
 
-
-
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
 
         return .delete
     }
 
+    // delete ingredient from realm that matches cells unique text label then update tableview and remove corresponding ingredient from ingredientListArray and/or ingredientListArraySearch depending on if hasSearched is true / false
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 
         if(.delete == editingStyle) {
@@ -226,13 +228,9 @@ extension IngredientListController: UITableViewDataSource {
 
             if(hasSearched) {
                 let itemToRemove = ingredientListArraySearch[indexPath.row]
-
                 let itemToRemoveIndex = ingredientListArray.firstIndex(of: itemToRemove)!
-
                 ingredientListArray.remove(at: itemToRemoveIndex)
-
                 ingredientListArraySearch.remove(at: indexPath.row)
-
             } else {
                 ingredientListArray.remove(at: indexPath.row)
             }

@@ -24,11 +24,12 @@ class NewIngredientController: UIViewController {
         addNewItemButton.layer.cornerRadius = 10
     }
 
+    // add new ingredient to realm that user created
     @IBAction func addNewItem(_ sender: UIButton) {
 
         loadIngredients()
+        // trim leading and trailing whitespace to avoid users entering blank strings and other negative consequences such as user having " Apple", "  Apple", "    Apple", etc.
         let ingredientName = ingredientNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        
         var hasIngredient = false
 
         for item in ingredientListArray {
@@ -37,10 +38,12 @@ class NewIngredientController: UIViewController {
             }
         }
         
+        // if ingredient doesn't exist in realm, and the new ingredients name is blank, display feedback
         if (hasIngredient == false) {
             if ingredientName == "" {
                 feedbackLabel.text = "Please enter name"
             } else {
+                // name is not blank, create and write to realm
                 let newIngredient = Ingredient(ingredientName, 1, false)
                 try! realm.write {
                     realm.add(newIngredient)
@@ -55,6 +58,7 @@ class NewIngredientController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 4) { self.feedbackLabel.text = " " }
     }
 
+    // load ingredients from realm into ingredient List Array
     func loadIngredients() {
         ingredientListArray.removeAll()
         let ingredients = realm.objects(Ingredient.self)
@@ -64,6 +68,8 @@ class NewIngredientController: UIViewController {
         }
     }
 }
+
+// limit characters in ingredientNameTextField to 26
 extension NewIngredientController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         

@@ -32,6 +32,7 @@ class ShoppingListController: UIViewController {
         }
     }
 
+    // clear shopping list via reseting Ingredients properties to default values and use alert to avoid user clicking by mistake
     @IBAction func clearShoppingList(_ sender: UIButton) {
 
         let alert = UIAlertController(title: "Warning", message: "Are you sure you want to clear shopping list", preferredStyle: .alert)
@@ -58,6 +59,7 @@ class ShoppingListController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    // load ingredients from realm into shoppingListItemArray
     func loadShoppingList() {
         shoppingListItemsArray.removeAll()
         let ingredients = realm.objects(Ingredient.self)
@@ -75,7 +77,8 @@ class ShoppingListController: UIViewController {
 
 
 extension ShoppingListController: UITableViewDelegate {
-
+    
+    // if user clicks "selects" row toggle ingredient isCheckedOff property and reload tableview
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let ingredient = shoppingListItemsArray[indexPath.row]
@@ -102,6 +105,7 @@ extension ShoppingListController: UITableViewDataSource {
         return shoppingListItemsArray.count
     }
 
+    // populate cell data from shoppingListItemsArray, if ingredients quantity is greater than 1, display quantity. if ingredients property isCheckedOff is true, set cells accessoryType to checkmark, else none
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -128,6 +132,7 @@ extension ShoppingListController: UITableViewDataSource {
         return .delete
     }
 
+    // remove cell from tableview and reset ingredient properties to default values
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 
         if(.delete == editingStyle) {
