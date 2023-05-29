@@ -25,21 +25,18 @@ class SingleRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadIngredients()
+        loadRecipeIngredients()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         recipeIngredientTableView.dataSource = self
-        
-        
-          self.title = "Recipe: \(name)"
-        
+        self.title = "Recipe: \(name)"
         recipeStepsTextView.text = "Steps:\n\(steps)"
 
     }
     
-    func loadIngredients() {
+    func loadRecipeIngredients() {
         
         recipeIngredientsArray.removeAll()
 
