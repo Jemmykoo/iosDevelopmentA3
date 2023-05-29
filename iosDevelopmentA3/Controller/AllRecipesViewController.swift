@@ -14,6 +14,7 @@ class AllRecipesViewController: UIViewController {
     
     @IBOutlet weak var allRecipesTableView: UITableView!
     @IBOutlet weak var allRecipesSearchBar: UISearchBar!
+    @IBOutlet weak var addNewRecipeButton: UIButton!
     
     let realm = try! Realm()
     
@@ -37,9 +38,7 @@ class AllRecipesViewController: UIViewController {
         allRecipesTableView.dataSource = self
         allRecipesSearchBar.delegate = self
         
-//        for item in buttonsStyling {
-//            item.layer.cornerRadius = 10
-//        }
+        addNewRecipeButton.layer.cornerRadius = 10
     }
     
     

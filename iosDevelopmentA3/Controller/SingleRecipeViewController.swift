@@ -33,7 +33,7 @@ class SingleRecipeViewController: UIViewController {
         recipeIngredientTableView.dataSource = self
         self.title = "Recipe: \(name)"
         recipeStepsTextView.text = "Steps:\n\(steps)"
-
+        addToShoppingListButton.layer.cornerRadius = 10
     }
     
     func loadRecipeIngredients() {

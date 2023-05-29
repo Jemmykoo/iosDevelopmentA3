@@ -36,6 +36,7 @@ class AddRecipeViewController: UIViewController {
         newRecipeSearchBar.delegate = self
         
         resetSelected()
+        newRecipeSaveButton.layer.cornerRadius = 10
     }
     
     func resetSelected() {
