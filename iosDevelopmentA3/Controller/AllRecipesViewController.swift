@@ -124,17 +124,6 @@ extension AllRecipesViewController: UITableViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-//            let cell = tableView.cellForRow(at: indexPath)!
-            
-                  // Navigate on other view
-               
-//            var count = 0
-//            for item in selectedRecipeListArray {
-//                if item == cell.textLabel?.text {
-//                    selectedRecipeListArray.remove(at: count)
-//                }
-//                count += 1
-//            }
 
 extension AllRecipesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

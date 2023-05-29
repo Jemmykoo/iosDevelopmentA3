@@ -14,7 +14,10 @@ class SingleRecipeViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var allIngredientsLabel: UILabel!
     @IBOutlet weak var stepsLabel: UILabel!
+    @IBOutlet weak var addToShoppingListButton: UIButton!
     
+    let realm = try! Realm()
+
     var name : String = ""
     var ingredients : List<Ingredient> = List<Ingredient>()
     var steps = ""
@@ -37,5 +40,19 @@ class SingleRecipeViewController: UIViewController {
         return ingredientString
     }
 
+    @IBAction func AddToShoppingList(_ sender: Any) {
+        for item in ingredients {
+            if(item.isInShoppingList) {
+                try! realm.write {
+                    item.quantity += 1
+                }
+            } else {
+                try! realm.write {
+                    item.isInShoppingList = true
+                }
+            }
 
+        }
+    }
+    
 }

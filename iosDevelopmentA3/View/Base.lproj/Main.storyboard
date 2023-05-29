@@ -171,7 +171,7 @@
                                 <rect key="frame" x="0.0" y="158.99999999999997" width="393" height="436.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="tRo-3S-lqg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="tRo-3S-lqg">
                                         <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tRo-3S-lqg" id="R9b-Fv-Ttf">
@@ -185,7 +185,7 @@
                                 <rect key="frame" x="0.0" y="605.33333333333337" width="393" height="172.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Recipe Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPD-il-6oa">
-                                        <rect key="frame" x="124.33333333333331" y="0.0" width="144.33333333333337" height="20.333333333333332"/>
+                                        <rect key="frame" x="124.33333333333333" y="0.0" width="144.33333333333337" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -273,7 +273,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ib6-Yc-8qE">
-                                <rect key="frame" x="44" y="132" width="130" height="55"/>
+                                <rect key="frame" x="44" y="132" width="297" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -293,11 +293,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wt-Jx-T7x">
+                                <rect key="frame" x="60" y="716" width="273" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Add Ingredients to Shopping List"/>
+                                <connections>
+                                    <action selector="AddToShoppingList:" destination="9qX-fO-OEg" eventType="touchUpInside" id="44b-8J-fvE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3E1-sh-0UA"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                     </view>
                     <connections>
+                        <outlet property="addToShoppingListButton" destination="8wt-Jx-T7x" id="eXF-Mj-NeD"/>
                         <outlet property="allIngredientsLabel" destination="IaD-3b-OIQ" id="1pP-0m-ui5"/>
                         <outlet property="nameLabel" destination="ib6-Yc-8qE" id="SgS-9O-egC"/>
                         <outlet property="stepsLabel" destination="RYd-m2-BN0" id="Fgf-4y-Fu3"/>
