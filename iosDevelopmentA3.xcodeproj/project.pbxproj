@@ -22,7 +22,6 @@
 		8CB5CD862A0FCE5E00F05A87 /* NewIngredientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB5CD852A0FCE5E00F05A87 /* NewIngredientController.swift */; };
 		8CF982DD2A05D6A70073A7BF /* ShoppingListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF982DC2A05D6A70073A7BF /* ShoppingListController.swift */; };
 		8CF982E12A05ECAF0073A7BF /* IngredientListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF982E02A05ECAF0073A7BF /* IngredientListController.swift */; };
-		8CF982E32A066C720073A7BF /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF982E22A066C720073A7BF /* UserDefaultsManager.swift */; };
 		8CF982E52A0DD2F10073A7BF /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF982E42A0DD2F10073A7BF /* Ingredient.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +41,6 @@
 		8CB5CD852A0FCE5E00F05A87 /* NewIngredientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIngredientController.swift; sourceTree = "<group>"; };
 		8CF982DC2A05D6A70073A7BF /* ShoppingListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListController.swift; sourceTree = "<group>"; };
 		8CF982E02A05ECAF0073A7BF /* IngredientListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListController.swift; sourceTree = "<group>"; };
-		8CF982E22A066C720073A7BF /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsManager.swift; path = Model/UserDefaultsManager.swift; sourceTree = "<group>"; };
 		8CF982E42A0DD2F10073A7BF /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +113,6 @@
 		8CF982D92A033EE90073A7BF /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8CF982E22A066C720073A7BF /* UserDefaultsManager.swift */,
 				8CF982E42A0DD2F10073A7BF /* Ingredient.swift */,
 				7D31CD5A2A21DD64006F621F /* Recipe.swift */,
 			);
@@ -205,7 +202,6 @@
 				7D02286D2A00F0C0005B8672 /* ViewController.swift in Sources */,
 				7D31CD592A21DC41006F621F /* AllRecipesViewController.swift in Sources */,
 				8CF982E52A0DD2F10073A7BF /* Ingredient.swift in Sources */,
-				8CF982E32A066C720073A7BF /* UserDefaultsManager.swift in Sources */,
 				7D0228692A00F0C0005B8672 /* AppDelegate.swift in Sources */,
 				7D02286B2A00F0C0005B8672 /* SceneDelegate.swift in Sources */,
 				8CF982DD2A05D6A70073A7BF /* ShoppingListController.swift in Sources */,
