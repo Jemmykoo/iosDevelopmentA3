@@ -34,6 +34,31 @@ class AddRecipeViewController: UIViewController {
         newRecipeMultiSelect.delegate = self
         newRecipeMultiSelect.dataSource = self
         newRecipeSearchBar.delegate = self
+        
+        resetSelected()
+    }
+    
+    func resetSelected() {
+        let ingredients = realm.objects(Ingredient.self)
+        let selectedIngredients = ingredients.where {
+            $0.isSelected == true
+        }
+
+        for item in selectedIngredients {
+            try! realm.write {
+                item.isSelected = false
+            }
+        }
+    }
+    
+    func loadSelectedIngredients() {
+        selectedIngredientListArray.removeAll()
+        for item in ingredientListArray
+        {
+            if item.isSelected {
+                selectedIngredientListArray.append(item.name)
+            }
+        }
     }
     
     func loadIngredients() {
@@ -49,18 +74,39 @@ class AddRecipeViewController: UIViewController {
     }
     
     @IBAction func saveRecipe(_ sender: Any) {
+        
+        loadSelectedIngredients()
+        
         let newRecipeName = newRecipeNameField.text!
         let newRecipeSteps = newRecipeStepsView.text!
         if newRecipeName == ""  || newRecipeSteps == "" ||  selectedIngredientListArray.count < 1 {
-            print("Error message here")
-            return
+            let alert = UIAlertController(title: "Please select your ingredients, fill out the steps and name your recipe.", message: "", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                            }))
+            self.present(alert, animated: true, completion: nil)
+        } else if recipeNameIsUsed() == true {
+            let alert = UIAlertController(title: "Please name your recipe something unique.", message: "", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let newRecipeIngredients = generateIngredientsList()
+            let recipeToSave = Recipe(newRecipeName, newRecipeIngredients, newRecipeSteps)
+            try! realm.write {
+                realm.add(recipeToSave)
+                navigationController?.popViewController(animated: true)
+            }
         }
-        let newRecipeIngredients = generateIngredientsList()
-        let recipeToSave = Recipe(newRecipeName, newRecipeIngredients, newRecipeSteps)
-        try! realm.write {
-            realm.add(recipeToSave)
-            navigationController?.popViewController(animated: true)
+    }
+    
+    func recipeNameIsUsed() -> Bool {
+        let data = realm.objects(Recipe.self)
+        for item in data {
+            if item.name == newRecipeNameField.text! {
+                return true
+            }
         }
+        return false
     }
     
     func generateIngredientsList() -> List<Ingredient>{
@@ -90,17 +136,30 @@ extension AddRecipeViewController: UISearchBarDelegate {
 extension AddRecipeViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)!
-        selectedIngredientListArray.append((cell.textLabel?.text)!)
+        var ingredient = Ingredient()
+
+        if hasSearched {
+            ingredient = ingredientListArraySearch[indexPath.row]
+        } else {
+            ingredient = ingredientListArray[indexPath.row]
+        }
+
+        try! realm.write {
+            ingredient.isSelected = true
+        }
     }
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)!
-        print(selectedIngredientListArray)
-        for (index, item) in selectedIngredientListArray.enumerated() {
-            if item == cell.textLabel?.text {
-                selectedIngredientListArray.remove(at: index)
-            }
+        var ingredient = Ingredient()
+
+        if hasSearched {
+            ingredient = ingredientListArraySearch[indexPath.row]
+        } else {
+            ingredient = ingredientListArray[indexPath.row]
+        }
+
+        try! realm.write {
+            ingredient.isSelected = false
         }
     }
 }
@@ -119,38 +178,19 @@ extension AddRecipeViewController: UITableViewDataSource {
         
         if(hasSearched) {
             cell.textLabel?.text = ingredientListArraySearch[indexPath.row].name
+            if ingredientListArraySearch[indexPath.row].isSelected {
+                cell.setSelected(true, animated: false)
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
+        } else {
+            if ingredientListArray[indexPath.row].isSelected {
+                cell.setSelected(true, animated: false)
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
         }
+        
         return cell
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
-    }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if(.delete == editingStyle) {
-            let cell = tableView.cellForRow(at: indexPath)!
-            let data = realm.objects(Ingredient.self)
-            for item in data {
-                if item.name == cell.textLabel?.text {
-                    try! realm.write {
-                        realm.delete(item)
-                    }
-                    break
-                }
-            }
-            newRecipeMultiSelect.beginUpdates()
-            if(hasSearched) {
-                let itemToRemove = ingredientListArraySearch[indexPath.row]
-                let itemToRemoveIndex = ingredientListArray.firstIndex(of: itemToRemove)!
-                ingredientListArray.remove(at: itemToRemoveIndex)
-                ingredientListArraySearch.remove(at: indexPath.row)
-            } else {
-                ingredientListArray.remove(at: indexPath.row)
-            }
-            newRecipeMultiSelect.deleteRows(at: [indexPath], with: .fade)
-            newRecipeMultiSelect.endUpdates()
-        }
-    }
 }
 

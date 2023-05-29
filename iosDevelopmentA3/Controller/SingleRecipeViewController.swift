@@ -14,7 +14,10 @@ class SingleRecipeViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var allIngredientsLabel: UILabel!
     @IBOutlet weak var stepsLabel: UILabel!
+    @IBOutlet weak var addToShoppingListButton: UIButton!
     
+    let realm = try! Realm()
+
     var name : String = ""
     var ingredients : List<Ingredient> = List<Ingredient>()
     var steps = ""
@@ -37,5 +40,23 @@ class SingleRecipeViewController: UIViewController {
         return ingredientString
     }
 
+    @IBAction func AddToShoppingList(_ sender: Any) {
+        for item in ingredients {
+            if(item.isInShoppingList) {
+                try! realm.write {
+                    item.quantity += 1
+                }
+            } else {
+                try! realm.write {
+                    item.isInShoppingList = true
+                }
+            }
 
+        }
+        let alert = UIAlertController(title: "The ingredients in this recipe have all been added to your shopping list.", message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 }
