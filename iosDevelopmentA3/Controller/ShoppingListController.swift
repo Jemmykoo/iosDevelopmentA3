@@ -47,7 +47,6 @@ class ShoppingListController: UIViewController {
                 realm.beginWrite()
                 item.isInShoppingList = false
                 item.isCheckedOff = false
-               // item.quantity = 1
                 try! realm.commitWrite()
             }
 
@@ -146,7 +145,6 @@ extension ShoppingListController: UITableViewDataSource {
                     try! realm.write {
                         item.isCheckedOff = false
                         item.isInShoppingList = false
-                        //item.quantity = 1
                     }
                     break
                 }

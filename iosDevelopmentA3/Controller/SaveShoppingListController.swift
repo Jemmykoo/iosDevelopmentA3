@@ -127,6 +127,7 @@ class SaveShoppingListController: UIViewController {
                     for item in list {
                         try! realm.write {
                             item.isInShoppingList = true
+                            item.isCheckedOff = false
                         }
                     }
                 }))
