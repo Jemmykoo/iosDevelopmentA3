@@ -173,7 +173,7 @@
                                 <rect key="frame" x="0.0" y="158.99999999999997" width="393" height="436.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="tRo-3S-lqg">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" translatesAutoresizingMaskIntoConstraints="NO" id="tRo-3S-lqg">
                                         <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tRo-3S-lqg" id="R9b-Fv-Ttf">
@@ -275,7 +275,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WzL-aJ-4hS">
-                                <rect key="frame" x="0.0" y="59" width="393" height="556.66666666666663"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="561"/>
                                 <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <color key="separatorColor" systemColor="labelColor"/>
                                 <prototypes>
@@ -300,7 +300,7 @@
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BeA-WW-nnW">
-                                <rect key="frame" x="0.0" y="625.66666666666663" width="393" height="192.33333333333337"/>
+                                <rect key="frame" x="0.0" y="630" width="393" height="188"/>
                                 <subviews>
                                     <textView multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="393" placeholderIntrinsicHeight="77.333333333333371" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSb-84-BAu">
                                         <rect key="frame" x="10" y="0.0" width="373" height="150"/>
@@ -313,9 +313,9 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wt-Jx-T7x">
-                                        <rect key="frame" x="0.0" y="158" width="393" height="34.333333333333343"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Add Ingredients to Shopping List"/>
+                                        <rect key="frame" x="0.0" y="158" width="393" height="30"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Add Ingredients to Shopping List"/>
                                         <connections>
                                             <action selector="AddToShoppingList:" destination="9qX-fO-OEg" eventType="touchUpInside" id="44b-8J-fvE"/>
                                         </connections>
@@ -530,8 +530,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Shopping List" id="vR4-vx-mBE">
-                        <barButtonItem key="rightBarButtonItem" image="square.and.arrow.down" catalog="system" style="plain" id="UIY-VB-LvH">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JbO-lO-l6K">
+                        <barButtonItem key="rightBarButtonItem" image="square.and.arrow.down" catalog="system" id="UIY-VB-LvH">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JbO-lO-l6K">
                                 <rect key="frame" x="304" y="11" width="73" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="linkColor"/>
