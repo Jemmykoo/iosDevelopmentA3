@@ -69,30 +69,30 @@ class SaveShoppingListController: UIViewController {
                 if ingredientsInShoppingList.isEmpty {
                     let alert = UIAlertController(title: "Error: Shopping list empty", message: "", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
-                            return
+                            //
+                        }))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    
+                    let alert = UIAlertController(title: "Shopping List Saved", message: "", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { [self] _ in
+                           
+                         
+                            let shoppingList = ShoppingList(name, ingredientsInShoppingList)
+                            
+                            try! realm.write {
+                                realm.add(shoppingList)
+                              
+                            }
+                            
+                            loadAllShoppingLists()
+                            savedShoppingListableView.reloadData()
+                        
                         }))
                     
                     self.present(alert, animated: true, completion: nil)
                 }
-                
-                let alert = UIAlertController(title: "Shopping List Saved", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { [self] _ in
-                       
-                     
-                        let shoppingList = ShoppingList(name, ingredientsInShoppingList)
-                        
-                        try! realm.write {
-                            realm.add(shoppingList)
-                          
-                        }
-                        
-                        loadAllShoppingLists()
-                        savedShoppingListableView.reloadData()
-                    
-                    }))
-                
-                self.present(alert, animated: true, completion: nil)
-                
             }
         }
     }
@@ -102,7 +102,7 @@ class SaveShoppingListController: UIViewController {
         if selectedShoppingList.shoppingList.isEmpty {
             let alert = UIAlertController(title: "Select Shopping list to load", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
-                    // select shopping list
+                    //return
                 }))
             
             self.present(alert, animated: true, completion: nil)
