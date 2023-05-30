@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         }
     }
 
-    // if no incredients exist in realm, write the defaults incredients to realm
+    // if no ingredients exist in realm, write the defaults ingredients to realm
     func writeDefaultIngredients() {
        
         let ingredients = realm.objects(Ingredient.self)

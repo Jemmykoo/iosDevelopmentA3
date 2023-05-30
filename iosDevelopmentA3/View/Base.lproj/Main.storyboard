@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -186,7 +187,7 @@
                                 <rect key="frame" x="0.0" y="605.33333333333337" width="393" height="172.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Recipe Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPD-il-6oa">
-                                        <rect key="frame" x="124.33333333333331" y="0.0" width="144.33333333333337" height="20.333333333333332"/>
+                                        <rect key="frame" x="124.33333333333333" y="0.0" width="144.33333333333337" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -350,6 +351,104 @@
             </objects>
             <point key="canvasLocation" x="3754.9618320610684" y="474.64788732394368"/>
         </scene>
+        <!--Save Shopping List-->
+        <scene sceneID="4Fw-0K-KHe">
+            <objects>
+                <viewController id="ySS-ZL-dcm" customClass="SaveShoppingListController" customModule="iosDevelopmentA3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1ea-x0-YBo">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Lhu-1p-4mb">
+                                <rect key="frame" x="0.0" y="103" width="393" height="554.66666666666663"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="IBr-b6-rw7" style="IBUITableViewCellStyleDefault" id="P5W-Yy-Oku">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="48.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P5W-Yy-Oku" id="wQ2-sk-rS8">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="48.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IBr-b6-rw7">
+                                                    <rect key="frame" x="20" y="0.0" width="353" height="48.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5C1-F8-DV3">
+                                <rect key="frame" x="0.0" y="698" width="393" height="110"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LJB-Mb-aqU">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9P-GB-qGy">
+                                        <rect key="frame" x="0.0" y="42" width="393" height="30"/>
+                                        <color key="backgroundColor" systemColor="tintColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveShoppingListButton:" destination="ySS-ZL-dcm" eventType="touchUpInside" id="T0L-O3-QHk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hE-Hf-JLL">
+                                        <rect key="frame" x="0.0" y="80" width="393" height="30"/>
+                                        <color key="backgroundColor" systemColor="tintColor"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Load">
+                                            <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loadSavedShoppingList:" destination="ySS-ZL-dcm" eventType="touchUpInside" id="E1u-Xe-xCr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shopping list name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x24-ZX-tIx">
+                                <rect key="frame" x="0.0" y="667.66666666666663" width="393" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BJ7-0W-oFv"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <constraints>
+                            <constraint firstItem="Lhu-1p-4mb" firstAttribute="top" secondItem="BJ7-0W-oFv" secondAttribute="top" id="4U0-yG-Vuo"/>
+                            <constraint firstItem="x24-ZX-tIx" firstAttribute="top" secondItem="Lhu-1p-4mb" secondAttribute="bottom" constant="10" id="6lK-yv-GSU"/>
+                            <constraint firstItem="x24-ZX-tIx" firstAttribute="leading" secondItem="BJ7-0W-oFv" secondAttribute="leading" id="8D5-ij-kZU"/>
+                            <constraint firstItem="5C1-F8-DV3" firstAttribute="leading" secondItem="BJ7-0W-oFv" secondAttribute="leading" id="OAo-oV-w6B"/>
+                            <constraint firstItem="Lhu-1p-4mb" firstAttribute="leading" secondItem="BJ7-0W-oFv" secondAttribute="leading" id="U6n-QT-YhZ"/>
+                            <constraint firstItem="BJ7-0W-oFv" firstAttribute="bottom" secondItem="5C1-F8-DV3" secondAttribute="bottom" constant="10" id="Y9t-Rf-ayA"/>
+                            <constraint firstItem="5C1-F8-DV3" firstAttribute="top" secondItem="x24-ZX-tIx" secondAttribute="bottom" constant="10" id="adF-L3-SQT"/>
+                            <constraint firstItem="BJ7-0W-oFv" firstAttribute="trailing" secondItem="x24-ZX-tIx" secondAttribute="trailing" id="ndM-iR-8pZ"/>
+                            <constraint firstItem="BJ7-0W-oFv" firstAttribute="trailing" secondItem="5C1-F8-DV3" secondAttribute="trailing" id="y3W-he-wRh"/>
+                            <constraint firstItem="BJ7-0W-oFv" firstAttribute="trailing" secondItem="Lhu-1p-4mb" secondAttribute="trailing" id="yVC-VC-Eda"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Save Shopping List" id="HLD-Ay-Puv"/>
+                    <connections>
+                        <outlet property="loadShoppingListButton" destination="0hE-Hf-JLL" id="5Vu-Ty-jEw"/>
+                        <outlet property="saveNewShoppingListButton" destination="D9P-GB-qGy" id="Fz5-ok-bpm"/>
+                        <outlet property="savedShoppingListableView" destination="Lhu-1p-4mb" id="Bqw-xf-ISo"/>
+                        <outlet property="shoppingListNameTextField" destination="LJB-Mb-aqU" id="e7D-5X-tof"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XOx-H9-ZIK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2017.5572519083969" y="-901.4084507042254"/>
+        </scene>
         <!--Shopping List-->
         <scene sceneID="xwe-Kq-9gt">
             <objects>
@@ -430,7 +529,22 @@
                             <constraint firstItem="5HQ-Nt-Xaa" firstAttribute="top" secondItem="Lrv-K6-T1g" secondAttribute="bottom" constant="10" id="tEm-bI-67s"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Shopping List" id="vR4-vx-mBE"/>
+                    <navigationItem key="navigationItem" title="Shopping List" id="vR4-vx-mBE">
+                        <barButtonItem key="rightBarButtonItem" image="square.and.arrow.down" catalog="system" style="plain" id="UIY-VB-LvH">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JbO-lO-l6K">
+                                <rect key="frame" x="304" y="11" width="73" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="linkColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Save" image="square.and.arrow.down" catalog="system">
+                                    <color key="titleColor" name="AccentColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ySS-ZL-dcm" kind="show" id="4uP-fa-w3P"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="shoppingListTableView" destination="uiG-gb-Ijb" id="G8I-GU-NBf"/>
                         <outletCollection property="buttonsStyling" destination="5HQ-Nt-Xaa" collectionClass="NSMutableArray" id="YLZ-f8-BXI"/>
@@ -566,18 +680,12 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="umH-CI-m3k">
-                                <rect key="frame" x="133.33333333333334" y="308.33333333333331" width="126.33333333333334" height="65.666666666666686"/>
+                                <rect key="frame" x="133.33333333333334" y="347.66666666666669" width="126.33333333333334" height="20.333333333333314"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredient Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9u4-xm-Zrw">
                                         <rect key="frame" x="0.0" y="0.0" width="126.33333333333333" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8J-Bq-Zhq">
-                                        <rect key="frame" x="61" y="45.333333333333371" width="4.6666666666666714" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -588,7 +696,7 @@
                         <constraints>
                             <constraint firstItem="Vf6-Dz-l4F" firstAttribute="centerX" secondItem="cu8-2w-ag2" secondAttribute="centerX" id="BAb-yh-7Y4"/>
                             <constraint firstItem="nfb-1i-GDf" firstAttribute="trailing" secondItem="Vf6-Dz-l4F" secondAttribute="trailing" constant="100" id="Dvf-XA-SQq"/>
-                            <constraint firstItem="Vf6-Dz-l4F" firstAttribute="top" secondItem="umH-CI-m3k" secondAttribute="bottom" constant="9" id="JCw-dJ-EbX"/>
+                            <constraint firstItem="Vf6-Dz-l4F" firstAttribute="top" secondItem="umH-CI-m3k" secondAttribute="bottom" constant="15" id="JCw-dJ-EbX"/>
                             <constraint firstItem="Vf6-Dz-l4F" firstAttribute="centerY" secondItem="cu8-2w-ag2" secondAttribute="centerY" id="b0j-iy-gET"/>
                             <constraint firstItem="umH-CI-m3k" firstAttribute="centerX" secondItem="cu8-2w-ag2" secondAttribute="centerX" id="hUK-WA-sTr"/>
                             <constraint firstItem="Vf6-Dz-l4F" firstAttribute="leading" secondItem="nfb-1i-GDf" secondAttribute="leading" constant="100" id="kFW-QG-2de"/>
@@ -597,7 +705,6 @@
                     <navigationItem key="navigationItem" title="New Ingredient" id="4bj-24-vsi"/>
                     <connections>
                         <outlet property="addNewItemButton" destination="VHV-Y6-NMU" id="Jr5-eg-YnQ"/>
-                        <outlet property="feedbackLabel" destination="v8J-Bq-Zhq" id="Kcn-fg-3Bm"/>
                         <outlet property="ingredientNameTextField" destination="mww-ZS-w4J" id="gR3-29-xqE"/>
                     </connections>
                 </viewController>
@@ -626,14 +733,18 @@
     </scenes>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -57,6 +57,7 @@ class SingleRecipeViewController: UIViewController {
             } else {
                 try! realm.write {
                     item.isInShoppingList = true
+                    item.quantity = 1
                 }
             }
 

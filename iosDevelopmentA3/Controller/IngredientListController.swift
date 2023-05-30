@@ -39,7 +39,7 @@ class IngredientListController: UIViewController {
             item.layer.cornerRadius = 10
         }
     }
-    
+
     // append all ingredients that have isSelected = true into selectedIngredientArray
     func loadSelectedIngredients() {
         selectedIngredientListArray.removeAll()
@@ -50,7 +50,7 @@ class IngredientListController: UIViewController {
             }
         }
     }
-    
+
     // if selected ingredients is empty do nothing, otherwise if ingredient is in shopping list, increment quantity, if it's not, then set isInShoppingList true
     @IBAction func addItemsToShoppingList(_ sender: UIButton) {
 
@@ -74,6 +74,7 @@ class IngredientListController: UIViewController {
                             ingredient.quantity += 1
                         } else {
                             ingredient.isInShoppingList = true
+                            ingredient.quantity = 1
                         }
                         try! realm.commitWrite()
                     }

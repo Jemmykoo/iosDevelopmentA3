@@ -41,21 +41,33 @@ class NewIngredientController: UIViewController {
         // if ingredient doesn't exist in realm, and the new ingredients name is blank, display feedback
         if (hasIngredient == false) {
             if ingredientName == "" {
-                feedbackLabel.text = "Please enter name"
+                let alert = UIAlertController(title: "Please enter valid name", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                        // Please enter valid name
+                    }))
+                self.present(alert, animated: true, completion: nil)
+
             } else {
                 // name is not blank, create and write to realm
-                let newIngredient = Ingredient(ingredientName, 1, false)
-                try! realm.write {
-                    realm.add(newIngredient)
-                }
-
-                feedbackLabel.text = "Ingredient Added"
+                let alert = UIAlertController(title: "Ingredient Added", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { [self] _ in
+                    
+                        let newIngredient = Ingredient(ingredientName, 1, false)
+                        try! realm.write {
+                            realm.add(newIngredient)
+                        }
+                    
+                    }))
+                
+                self.present(alert, animated: true, completion: nil)
             }
         } else {
-            feedbackLabel.text = "Ingredient already exists"
+            let alert = UIAlertController(title: "Ingredient already exists", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
+                    // ingredient already exists
+                }))
+            self.present(alert, animated: true, completion: nil)
         }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) { self.feedbackLabel.text = " " }
     }
 
     // load ingredients from realm into ingredient List Array
