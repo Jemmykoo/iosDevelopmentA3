@@ -211,6 +211,7 @@ extension SaveShoppingListController: UITableViewDataSource {
             
             savedShoppingListableView.beginUpdates()
             allShoppingListArray.remove(at: indexPath.row)
+            selectedShoppingList = ShoppingList()
             savedShoppingListableView.deleteRows(at: [indexPath], with: .fade)
             savedShoppingListableView.endUpdates()
         }
