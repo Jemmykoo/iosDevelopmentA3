@@ -34,7 +34,6 @@ class SaveShoppingListController: UIViewController {
         
         savedShoppingListableView.delegate = self
         savedShoppingListableView.dataSource = self
-        
     }
     
     @IBAction func saveShoppingListButton(_ sender: UIButton) {
@@ -100,9 +99,9 @@ class SaveShoppingListController: UIViewController {
     @IBAction func loadSavedShoppingList(_ sender: UIButton) {
         
         if selectedShoppingList.shoppingList.isEmpty {
-            let alert = UIAlertController(title: "Select Shopping list to load", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Shopping list not selected or empty", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Okay", comment: "Default action"), style: .default, handler: { _ in
-                    //return
+                    // do nothing
                 }))
             
             self.present(alert, animated: true, completion: nil)
