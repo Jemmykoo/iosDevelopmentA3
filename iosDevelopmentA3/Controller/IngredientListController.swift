@@ -74,6 +74,7 @@ class IngredientListController: UIViewController {
                             ingredient.quantity += 1
                         } else {
                             ingredient.isInShoppingList = true
+                            ingredient.quantity = 1
                         }
                         try! realm.commitWrite()
                     }
